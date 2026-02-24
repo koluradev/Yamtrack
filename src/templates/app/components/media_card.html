@@ -5,7 +5,7 @@
   <div class="relative">
     <a href="{{ item|media_url }}">
       <img alt="{{ title }}"
-           class="lazyload w-full aspect-2/3 bg-[#3e454d] {% if item.image != IMG_NONE %}object-cover{% endif %}"
+           class="lazyload w-full aspect-2/3 {% if item.image != IMG_NONE %}object-cover{% endif %}"
            data-src="{{ item.image }}"
            src="{{ IMG_NONE }}">
     </a>
