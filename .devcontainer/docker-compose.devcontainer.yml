@@ -1,0 +1,18 @@
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/python:3.12
+    volumes:
+      - ..:/workspaces/yamtrack:cached
+    working_dir: /workspaces/yamtrack
+    command: sleep infinity
+    depends_on:
+      - redis
+    env_file:
+      - ../.env
+    environment:
+      - DEBUG=True
+      - REDIS_URL=redis://redis:6379
+
+  redis:
+    image: redis:8-alpine
+    restart: unless-stopped

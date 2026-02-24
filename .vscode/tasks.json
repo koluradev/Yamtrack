@@ -1,0 +1,54 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Yamtrack: Django migrate",
+            "type": "shell",
+            "command": "python manage.py migrate",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Yamtrack: Django runserver",
+            "type": "shell",
+            "command": "python manage.py runserver 0.0.0.0:8000",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Yamtrack: Celery worker+beat",
+            "type": "shell",
+            "command": "celery -A config worker --beat --scheduler django --loglevel DEBUG",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Yamtrack: Tailwind watch (npx)",
+            "type": "shell",
+            "command": "npx tailwindcss -i ./static/css/input.css -o ./static/css/main.css --watch",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Yamtrack: Dev (all)",
+            "dependsOn": [
+                "Yamtrack: Django migrate",
+                "Yamtrack: Django runserver",
+                "Yamtrack: Celery worker+beat",
+                "Yamtrack: Tailwind watch (npx)"
+            ],
+            "dependsOrder": "sequence"
+        }
+    ]
+}
