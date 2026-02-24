@@ -94,9 +94,13 @@ class DateFormatChoices(models.TextChoices):
     """Choices for date format display."""
 
     ISO = "Y-m-d", "2026-01-18 (ISO)"
-    EUROPEAN = "d/m/Y", "18/01/2026 (EU)"
-    US = "m/d/Y", "01/18/2026 (US)"
-    LONG = "M j, Y", "Jan 18, 2026"
+    US = "m/d/Y", "01/18/2026 (US, m/d/Y)"
+    US_LONG = "M j, Y", "Jan 18, 2026 (US, long)"
+    EUROPEAN_1 = "d/m/Y", "18/01/2026 (EU, d/m/Y)"
+    EUROPEAN_2 = "d.m.Y", "18.01.2026 (EU, d.m.Y)"
+    EUROPEAN_3 = "d-m-Y", "18-01-2026 (EU, d-m-Y)"
+    EU_LONG_2 = "j M Y", "18 Jan 2026 (EU / UK, long)"
+    EU_LONG_3 = "j. F Y", "18. January 2026 (EU, full month)"
 
 
 class TimeFormatChoices(models.TextChoices):
