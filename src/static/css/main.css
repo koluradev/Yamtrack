@@ -57,8 +57,11 @@
     --color-indigo-700: oklch(45.7% 0.24 277.023);
     --color-indigo-800: oklch(39.8% 0.195 277.366);
     --color-violet-600: oklch(54.1% 0.281 293.009);
+    --color-violet-700: oklch(49.1% 0.27 292.581);
+    --color-violet-800: oklch(43.2% 0.232 292.759);
     --color-purple-400: oklch(71.4% 0.203 305.504);
     --color-fuchsia-400: oklch(74% 0.238 322.16);
+    --color-fuchsia-500: oklch(66.7% 0.295 322.15);
     --color-fuchsia-600: oklch(59.1% 0.293 322.896);
     --color-fuchsia-700: oklch(51.8% 0.253 323.949);
     --color-slate-200: oklch(92.9% 0.013 255.508);
@@ -1264,8 +1267,14 @@
   .border-emerald-700 {
     border-color: var(--color-emerald-700);
   }
+  .border-fuchsia-500 {
+    border-color: var(--color-fuchsia-500);
+  }
   .border-gray-300 {
     border-color: var(--color-gray-300);
+  }
+  .border-gray-500 {
+    border-color: var(--color-gray-500);
   }
   .border-gray-600 {
     border-color: var(--color-gray-600);
@@ -1302,6 +1311,9 @@
   }
   .border-transparent {
     border-color: transparent;
+  }
+  .border-violet-700 {
+    border-color: var(--color-violet-700);
   }
   .border-white {
     border-color: var(--color-white);
@@ -1429,11 +1441,23 @@
   .bg-fuchsia-600 {
     background-color: var(--color-fuchsia-600);
   }
+  .bg-fuchsia-600\/80 {
+    background-color: color-mix(in srgb, oklch(59.1% 0.293 322.896) 80%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-fuchsia-600) 80%, transparent);
+    }
+  }
   .bg-gray-500 {
     background-color: var(--color-gray-500);
   }
   .bg-gray-600 {
     background-color: var(--color-gray-600);
+  }
+  .bg-gray-600\/80 {
+    background-color: color-mix(in srgb, oklch(44.6% 0.03 256.802) 80%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-gray-600) 80%, transparent);
+    }
   }
   .bg-gray-700 {
     background-color: var(--color-gray-700);
@@ -1596,6 +1620,15 @@
   }
   .bg-violet-600 {
     background-color: var(--color-violet-600);
+  }
+  .bg-violet-800 {
+    background-color: var(--color-violet-800);
+  }
+  .bg-violet-800\/90 {
+    background-color: color-mix(in srgb, oklch(43.2% 0.232 292.759) 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-violet-800) 90%, transparent);
+    }
   }
   .bg-white {
     background-color: var(--color-white);
@@ -2310,6 +2343,13 @@
       }
     }
   }
+  .hover\:border-fuchsia-500 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-fuchsia-500);
+      }
+    }
+  }
   .hover\:border-gray-500 {
     &:hover {
       @media (hover: hover) {
@@ -2425,6 +2465,13 @@
       }
     }
   }
+  .hover\:bg-fuchsia-600\/100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-fuchsia-600);
+      }
+    }
+  }
   .hover\:bg-fuchsia-700 {
     &:hover {
       @media (hover: hover) {
@@ -2446,6 +2493,13 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-gray-600) 50%, transparent);
         }
+      }
+    }
+  }
+  .hover\:bg-gray-600\/100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-600);
       }
     }
   }
@@ -2769,6 +2823,16 @@
       border-color: var(--color-amber-700);
     }
   }
+  .active\:border-fuchsia-700 {
+    &:active {
+      border-color: var(--color-fuchsia-700);
+    }
+  }
+  .active\:border-gray-700 {
+    &:active {
+      border-color: var(--color-gray-700);
+    }
+  }
   .active\:border-indigo-700 {
     &:active {
       border-color: var(--color-indigo-700);
@@ -2782,6 +2846,16 @@
   .active\:bg-amber-700 {
     &:active {
       background-color: var(--color-amber-700);
+    }
+  }
+  .active\:bg-fuchsia-700 {
+    &:active {
+      background-color: var(--color-fuchsia-700);
+    }
+  }
+  .active\:bg-gray-700 {
+    &:active {
+      background-color: var(--color-gray-700);
     }
   }
   .active\:bg-indigo-700 {
