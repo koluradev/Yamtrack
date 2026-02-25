@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block content %}
-  <h1 class="text-3xl sm:text-4xl font-bold mb-6 leading-7 sm:leading-9 bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+  <h1 class="text-3xl sm:text-4xl font-bold mb-6 leading-8 sm:leading-12 bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text text-transparent">
     {{ media_type|media_type_readable_plural }}
   </h1>
 
@@ -33,11 +33,11 @@
       <input type="hidden" name="layout" x-model="layout">
     </form>
 
-    <div class="flex flex-col md:flex-row gap-4 mb-6">
+    <div class="flex flex-col md:flex-row gap-2 mb-6">
       <!-- Search -->
       <div class="relative grow">
         <input placeholder="Search {{ media_type_plural }} in your list..."
-               class="w-full py-2 pl-10 pr-4 bg-[#39404b] rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#4a9eff] appearance-none"
+               class="w-full py-2 pl-10 pr-4 bg-gray-700 rounded-md text-white border border-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 appearance-none"
                type="text"
                x-model="search"
                hx-get="{% url 'medialist' media_type %}"
@@ -55,7 +55,7 @@
       <div class="flex gap-2 flex-wrap">
         <!-- Filter by Status -->
         <div class="relative" x-data="{ open: false }">
-          <button class="flex items-center px-4 py-2 bg-[#39404b] rounded-md hover:bg-[#454d5a] transition-colors cursor-pointer"
+          <button class="flex items-center px-4 py-2 border border-gray-500 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors duration-200 cursor-pointer"
                   @click="open = !open"
                   type="button">
             {% include "app/icons/funnel.svg" with classes="w-4 h-4 mr-2" %}
@@ -63,7 +63,7 @@
             {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute z-10 mt-2 py-1 w-48 bg-[#39404b] rounded-md shadow-lg overflow-hidden border border-gray-700"
+          <div class="absolute z-10 mt-2 py-1 w-48 rounded-md shadow-lg border border-gray-700 bg-gray-800/80 backdrop-blur overflow-hidden"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -78,8 +78,8 @@
                       {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                      :class="status === '{{ value }}' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer text-white rounded-xs"
+                      :class="status === '{{ value }}' ? 'bg-gradient-to-br from-purple-500 to-purple-700 font-medium' : 'hover:bg-gray-600'"
                       @click="status = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
@@ -88,7 +88,7 @@
 
         <!-- Sort by -->
         <div class="relative" x-data="{ open: false }">
-          <button class="flex items-center px-4 py-2 bg-[#39404b] rounded-md hover:bg-[#454d5a] transition-colors cursor-pointer"
+          <button class="flex items-center px-4 py-2 border border-gray-500 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors duration-200 cursor-pointer"
                   @click="open = !open"
                   type="button">
             {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4 mr-2" %}
@@ -96,7 +96,7 @@
             {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute z-10 mt-2 py-1 w-48 bg-[#39404b] rounded-md shadow-lg overflow-hidden border border-gray-700"
+          <div class="absolute z-10 mt-2 py-1 w-48 rounded-md shadow-lg border border-gray-700 bg-gray-800/80 backdrop-blur overflow-hidden"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -111,8 +111,8 @@
                       {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                      :class="sort === '{{ value }}' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer text-white rounded-xs"
+                      :class="sort === '{{ value }}' ? 'bg-gradient-to-br from-purple-500 to-purple-700 font-medium' : 'hover:bg-gray-600'"
                       @click="sort = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
@@ -120,15 +120,15 @@
         </div>
 
         <!-- Layout Toggle -->
-        <div class="flex rounded-md overflow-hidden border border-gray-700">
+        <div class="flex rounded-md overflow-hidden border border-gray-500">
           <a :href="`{% url 'medialist' media_type %}?${search ? 'search=' + search + '&' : ''}${status !== 'all' ? 'status=' + status + '&' : ''}${sort !== 'score' ? 'sort=' + sort + '&' : ''}layout=grid`"
-             class="p-2 cursor-pointer"
-             :class="layout === 'grid' ? 'bg-indigo-600 text-white' : 'bg-[#39404b] hover:bg-[#454d5a]'"
+             class="p-2 pt-2.5 cursor-pointer transition-colors duration-200"
+             :class="layout === 'grid' ? 'bg-gradient-to-br from-purple-500 to-purple-700 text-white' : 'bg-gray-700 hover:bg-gray-600'"
              title="Grid View"
              @click="layout = 'grid'">{% include "app/icons/four-square.svg" with classes="w-5 h-5" %}</a>
           <a :href="`{% url 'medialist' media_type %}?${search ? 'search=' + search + '&' : ''}${status !== 'all' ? 'status=' + status + '&' : ''}${sort !== 'score' ? 'sort=' + sort + '&' : ''}layout=table`"
-             class="p-2 cursor-pointer"
-             :class="layout === 'table' ? 'bg-indigo-600 text-white' : 'bg-[#39404b] hover:bg-[#454d5a]'"
+             class="p-2 pt-2.5 cursor-pointer transition-colors duration-200"
+             :class="layout === 'table' ? 'bg-gradient-to-br from-purple-500 to-purple-700 text-white' : 'bg-gray-700 hover:bg-gray-600'"
              title="Table View"
              @click="layout = 'table'">{% include "app/icons/table.svg" with classes="w-5 h-5" %}</a>
         </div>
@@ -137,17 +137,14 @@
 
     {% if not media_list %}
       <div id="empty_list"
-           class="flex flex-col items-center justify-center py-16 bg-[#2a2f35] rounded-lg">
+           class="flex flex-col items-center justify-center py-16 border border-gray-700 bg-gray-900 rounded-lg">
         <div class="text-center max-w-md mx-auto p-6">
-          <div class="bg-[#39404b] rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-            {% include "app/icons/edit.svg" with classes="w-8 h-8 text-gray-400" %}
-          </div>
           <h3 class="text-xl font-semibold mb-2">No {{ media_type|media_type_readable_plural }} Tracked Yet</h3>
           <p class="text-gray-400 mb-6">
             Start tracking your {{ media_type_plural }} to keep a record of what you've {{ media_type|media_past_verb }}.
           </p>
           <a href="{{ media_type|sample_search }}"
-             class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+             class="px-4 py-2 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-md transition-colors duration-200">
             Browse {{ media_type|media_type_readable_plural }}
           </a>
         </div>
@@ -155,8 +152,8 @@
     {% elif current_layout == "grid" %}
       <div class="media-grid">{% include "app/components/media_grid_items.html" %}</div>
     {% else %}
-      <div class="bg-[#2a2f35] p-4 rounded-lg overflow-hidden max-w-[calc(100svw-4rem)] overflow-x-scroll">
-        <table class="w-full bg-[#2a2f35]">
+      <div class="border border-gray-700 bg-gray-900 p-4 rounded-lg overflow-hidden max-w-[calc(100svw-4rem)] overflow-x-scroll">
+        <table class="w-full bg-gray-900">
           <thead class="text-left text-gray-400 text-sm">
             <tr>
               <th class="p-2 w-15"></th>
@@ -178,7 +175,7 @@
 
     <div id="loading-indicator" class="htmx-indicator text-center pt-8">
       <div class="inline-flex justify-center items-center">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-400"></div>
       </div>
     </div>
   </div>
