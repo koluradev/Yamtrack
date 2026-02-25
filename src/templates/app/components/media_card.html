@@ -88,7 +88,7 @@
       <div class="relative flex items-center justify-center space-x-2.5">
         {% if item.media_type == MediaTypes.EPISODE.value %}
           <button @click="trackOpen = true"
-                  class="p-2.5 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-blue text-white rounded-full transition duration-150 ease-in-out cursor-pointer">
+                  class="p-2.5 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-full transition duration-150 ease-in-out cursor-pointer">
             {% if media %}
               {% include "app/icons/eye.svg" with classes="w-4 h-4" %}
             {% else %}
@@ -97,7 +97,7 @@
           </button>
         {% else %}
           {# Track Button #}
-          <button class="p-2.5 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-blue text-white rounded-full transition duration-150 ease-in-out cursor-pointer"
+          <button class="p-2.5 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-full transition duration-150 ease-in-out cursor-pointer"
                   title="Add to tracker"
                   hx-get="{% media_view_url 'track_modal' item %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "instance_id": "{{ media.id }}"}'
