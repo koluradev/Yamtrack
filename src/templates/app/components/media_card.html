@@ -13,35 +13,35 @@
     <div class="absolute left-0 right-0 top-0 flex items-center justify-between p-2">
       {% if media.status %}
         {% if media.status == Status.COMPLETED.value %}
-          <div class="pointer-events-none z-40 self-start rounded-full border shadow-md border-emerald-700 bg-emerald-800/90">
+          <div class="pointer-events-none z-5 self-start rounded-full border shadow-md border-emerald-700 bg-emerald-800/90">
             <div class="flex h-4 items-center px-2 py-2 text-center text-xs uppercase tracking-wider sm:h-5">
               <div class="w-4 h-4 text-emerald-100">{% include "app/icons/states/completed.svg" %}</div>
             </div>
           </div>
 
         {% elif media.status == Status.IN_PROGRESS.value %}
-          <div class="pointer-events-none z-40 self-start rounded-full border shadow-md border-indigo-700 bg-indigo-800/90">
+          <div class="pointer-events-none z-5 self-start rounded-full border shadow-md border-indigo-700 bg-indigo-800/90">
             <div class="flex h-4 items-center px-2 py-2 text-center text-xs uppercase tracking-wider sm:h-5">
               <div class="w-4 h-4 text-indigo-100">{% include "app/icons/states/in-progress.svg" %}</div>
             </div>
           </div>
 
         {% elif media.status == Status.PAUSED.value %}
-          <div class="pointer-events-none z-40 self-start rounded-full border shadow-md border-orange-700 bg-orange-800/90">
+          <div class="pointer-events-none z-5 self-start rounded-full border shadow-md border-orange-700 bg-orange-800/90">
             <div class="flex h-4 items-center px-2 py-2 text-center text-xs uppercase tracking-wider sm:h-5">
               <div class="w-4 h-4 text-orange-100">{% include "app/icons/states/paused.svg" %}</div>
             </div>
           </div>
 
         {% elif media.status == Status.PLANNING.value %}
-          <div class="pointer-events-none z-40 self-start rounded-full border shadow-md border-sky-700 bg-sky-800/90">
+          <div class="pointer-events-none z-5 self-start rounded-full border shadow-md border-sky-700 bg-sky-800/90">
             <div class="flex h-4 items-center px-2 py-2 text-center text-xs uppercase tracking-wider sm:h-5">
               <div class="w-4 h-4 text-sky-100">{% include "app/icons/states/planning.svg" %}</div>
             </div>
           </div>
 
         {% elif media.status == Status.DROPPED.value %}
-          <div class="pointer-events-none z-40 self-start rounded-full border shadow-md border-red-700 bg-red-800/90">
+          <div class="pointer-events-none z-5 self-start rounded-full border shadow-md border-red-700 bg-red-800/90">
             <div class="flex h-4 items-center px-2 py-2 text-center text-xs uppercase tracking-wider sm:h-5">
               <div class="w-4 h-4 text-red-100">{% include "app/icons/states/dropped.svg" %}</div>
             </div>
@@ -50,7 +50,7 @@
       {% endif %}
 
       {% if media.score|show_media_score:user %}
-        <div class="pointer-events-none z-40 self-end rounded-full border shadow-md border-yellow-500 bg-yellow-600/90">
+        <div class="pointer-events-none z-5 self-end rounded-full border shadow-md border-yellow-500 bg-yellow-600/90">
           <div class="flex h-4 items-center px-2 py-2 text-center text-xs uppercase tracking-wider sm:h-5">
             <span class="text-yellow-100">{{ media.formatted_score }}</span>
           </div>
