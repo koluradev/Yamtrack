@@ -353,7 +353,7 @@ def unicode_icon(name):
 
 
 @register.simple_tag
-def icon(name, is_active, extra_classes="w-5 h-5"):
+def icon(name, extra_classes="w-6 h-6"):
     """Return the SVG icon for the given name."""
     base_svg = """<svg xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -364,16 +364,14 @@ def icon(name, is_active, extra_classes="w-5 h-5"):
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      class="{active_class}{extra_classes}">
+                      class="{extra_classes}">
                       {content}
                  </svg>"""
 
     content = config.get_svg_icon(name)
-    active_class = "text-indigo-400 " if is_active else ""
 
     svg = base_svg.format(
         content=content,
-        active_class=active_class,
         extra_classes=extra_classes,
     )
 

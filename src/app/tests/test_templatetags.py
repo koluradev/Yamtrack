@@ -346,14 +346,11 @@ class AppTagsTests(TestCase):
         for media_type in MediaTypes.values:
             try:
                 # Test with both active and inactive states
-                active_result = app_tags.icon(media_type, is_active=True)
-                inactive_result = app_tags.icon(media_type, is_active=False)
+                active_result = app_tags.icon(media_type)
 
                 # Just check that we get a non-empty string
                 self.assertTrue(isinstance(active_result, str))
                 self.assertTrue(len(active_result) > 0)
-                self.assertTrue(isinstance(inactive_result, str))
-                self.assertTrue(len(inactive_result) > 0)
             except KeyError:
                 self.fail(f"icon raised KeyError for {media_type}")
 

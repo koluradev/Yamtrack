@@ -114,7 +114,7 @@
                       @click="mediaType = '{{ media_type }}'"
                       :class="mediaType === '{{ media_type }}' ? 'bg-indigo-600 border-indigo-500 text-white' : 'border-gray-600 text-gray-300 hover:bg-[#39404b]'"
                       class="flex items-center gap-2 p-3 rounded-md border transition-colors cursor-pointer">
-                {% icon media_type is_active=False %}
+                {% icon media_type %}
                 <span class="text-sm font-medium">{{ media_type|media_type_readable }}</span>
               </button>
             {% endfor %}

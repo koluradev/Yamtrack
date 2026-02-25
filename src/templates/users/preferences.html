@@ -207,7 +207,7 @@
           {% for media_type in media_types %}
             <div class="flex items-center justify-between p-3 bg-[#39404b] rounded-md">
               <div class="flex items-center text-gray-400">
-                {% icon media_type is_active=False %}
+                {% icon media_type %}
                 <span class="text-gray-200 text-sm ml-2">{{ media_type|media_type_readable_plural }}</span>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
