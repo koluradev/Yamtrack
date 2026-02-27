@@ -8,11 +8,18 @@
     ],
     "features": {
         "ghcr.io/devcontainers/features/node:1": {},
-        "ghcr.io/r3dpoint/devcontainer-features/tailwindcss-standalone-cli:1": {}
+        "ghcr.io/r3dpoint/devcontainer-features/tailwindcss-standalone-cli:1": {},
+        "ghcr.io/devcontainers/features/git:1": {}
     },
+    "mounts": [
+        "source=yamtrack-vscode-home,target=/home/vscode,type=volume"
+    ],
     "postCreateCommand": "bash .devcontainer/post-create.sh",
     "customizations": {
         "vscode": {
+            "settings": {
+                "files.eol": "\n"
+            },
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
