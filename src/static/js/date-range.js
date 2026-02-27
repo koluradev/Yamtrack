@@ -196,12 +196,17 @@ function dateRangePicker() {
     getDateFormatOptions(djangoFormat) {
       // Map common Django format strings to Intl.DateTimeFormat options
       switch (djangoFormat) {
-        case "d/m/Y": // European: 18/01/2026
-        case "m/d/Y": // US: 01/18/2026
-        case "Y-m-d": // ISO: 2026-01-18
+        case "d/m/Y":
+        case "d.m.Y":
+        case "d-m-Y":
+        case "m/d/Y":
+        case "Y-m-d":
           return { year: "numeric", month: "2-digit", day: "2-digit" };
-        case "M j, Y": // Long: Jan 18, 2026
+        case "M j, Y":
+        case "j M Y":
           return { year: "numeric", month: "short", day: "numeric" };
+        case "j. F Y":
+          return { year: "numeric", month: "long", day: "numeric" };
         default:
           return { year: "numeric", month: "short", day: "numeric" };
       }
