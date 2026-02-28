@@ -11,19 +11,19 @@
 
 {% block content %}
   <div x-data="{ showModal: false }">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
       <div>
-        <h1 class="text-3xl font-bold mb-2">Lists</h1>
-        <p class="text-gray-400">Organize and share your media lists</p>
+        <h1 class="yt-page-title">Lists</h1>
+        <p class="yt-page-subtitle">Organize and share your media lists</p>
       </div>
       <button @click="showModal = true"
-              class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors cursor-pointer">
-        {% include "app/icons/plus.svg" with classes="w-5 h-5 mr-2" %}
+              class="yt-button-list flex items-center gap-2 group">
+        {% include "app/icons/plus.svg" with classes="w-4 h-4" %}
         New List
       </button>
     </div>
 
-    <div class="relative mb-6 flex gap-2"
+    <div class="relative mb-6 flex gap-4"
          x-data="{ sort: '{{ current_sort }}', query: '{{ request.GET.q|default:''|escapejs }}' }">
 
       <!-- Form to manage state -->
@@ -34,7 +34,7 @@
 
       <div class="relative flex-1">
         <input placeholder="Search lists..."
-               class="w-full py-2 pl-10 pr-4 bg-[#39404b] rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#4a9eff] appearance-none"
+               class="yt-input w-full !pl-10 appearance-none"
                type="text"
                x-model="query"
                autocomplete="off"
@@ -51,16 +51,15 @@
       </div>
 
       <div class="relative" x-data="{ open: false }">
-        <button class="h-10 flex items-center gap-2 px-4 bg-[#39404b] rounded-md hover:bg-[#454d5a] transition-colors cursor-pointer"
+        <button class="yt-dropdown flex items-center"
                 @click="open = !open"
                 type="button">
           {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4" %}
-          <span class="text-sm"
-                x-text="sort === 'last_item_added' ? 'Last Item Added' : (sort === 'name' ? 'Name' : (sort === 'newest_first' ? 'Newest First' : 'Items Count'))"></span>
-          {% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}
+          <span x-text="sort === 'last_item_added' ? 'Last Item Added' : (sort === 'name' ? 'Name' : (sort === 'newest_first' ? 'Newest First' : 'Items Count'))"></span>
+          {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
         </button>
 
-        <div class="absolute right-0 mt-2 py-1 w-48 bg-[#39404b] rounded-md shadow-lg overflow-hidden z-10 border border-gray-700"
+        <div class="yt-dropdown-popup absolute w-48"
              x-cloak
              x-show="open"
              @click.outside="open = false"
@@ -75,8 +74,8 @@
                     {% if custom_lists %} hx-target="#lists-grid" {% else %} hx-target="this" hx-swap="none" {% endif %}
                     hx-include="#filter-form"
                     hx-indicator="#loading-indicator"
-                    class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                    :class="sort === '{{ value }}' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                    class="yt-dropdown-item w-full"
+                    :class="sort === '{{ value }}' ? 'yt-dropdown-item-current' : ''"
                     @click="sort = '{{ value }}'; open = false"
                     type="button">{{ label }}</button>
           {% endfor %}
@@ -90,17 +89,11 @@
         {% include "lists/components/list_grid.html" %}
       </div>
     {% else %}
-      <div class="flex flex-col items-center justify-center py-16 bg-[#2a2f35] rounded-lg">
+      <div class="flex flex-col items-center justify-center py-16 border border-gray-700 bg-gray-900 rounded-lg">
         <div class="text-center max-w-md mx-auto p-6">
-          <div class="bg-[#39404b] rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-            {% include "app/icons/list-add.svg" with classes="w-8 h-8 text-gray-400" %}
-          </div>
           <h3 class="text-xl font-semibold mb-2">No Lists Created Yet</h3>
           <p class="text-gray-400 mb-6">Create custom lists to organize your media collection and share with friends.</p>
-          <button @click="showModal = true"
-                  class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors cursor-pointer">
-            Create Your First List
-          </button>
+          <button @click="showModal = true" class="yt-button-list">Create Your First List</button>
         </div>
       </div>
     {% endif %}

@@ -14,18 +14,18 @@
   <div class="flex items-center justify-between mb-6"
        x-data="{ showModal: false }">
     <div>
-      <h1 class="text-3xl font-bold mb-2">{{ custom_list.name }}</h1>
+      <h1 class="yt-page-title">{{ custom_list.name }}</h1>
       <div class="flex items-center gap-4">
         <div class="flex items-center">
           <div class="flex -space-x-2 mr-2">
-            <div class="w-6 h-6 rounded-full bg-[#4f46e5] flex items-center justify-center border-2 border-[#2a2f35] text-xs font-medium"
+            <div class="w-6 h-6 flex items-center justify-center p-2 rounded-full text-white border bg-teal-600/80 border-teal-500 text-xs font-medium"
                  title="{{ custom_list.owner.username }}">{{ custom_list.owner.username.0|upper }}</div>
             {% for collaborator in custom_list.collaborators.all %}
-              <div class="w-6 h-6 rounded-full bg-[#4b5563] flex items-center justify-center border-2 border-[#2a2f35] text-xs font-medium"
+              <div class="w-6 h-6 flex items-center justify-center p-2 px-4 py-2 rounded-full text-white border bg-gray-700 border-gray-500 text-xs font-medium"
                    title="{{ collaborator.username }}">{{ collaborator.username.0|upper }}</div>
             {% endfor %}
           </div>
-          <span class="text-sm text-gray-400">
+          <span class="yt-page-subtitle">
             {{ collaborators_count }} collaborator{{ collaborators_count|pluralize }}
             <span class="mx-2">•</span>
             {{ items_count }} item{{ items_count|pluralize }}
@@ -34,8 +34,8 @@
       </div>
     </div>
     <button @click="showModal = true"
-            class="px-4 py-2 bg-[#39404b] hover:bg-[#454d5a] rounded-md transition-colors flex items-center gap-2 text-sm group cursor-pointer">
-      {% include "app/icons/horizontal-sliders.svg" with classes="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" %}
+            class="yt-button-list flex items-center gap-2 group">
+      {% include "app/icons/horizontal-sliders.svg" with classes="w-4 h-4" %}
       <span>Edit List</span>
     </button>
     {% include "lists/components/list_form.html" %}
@@ -59,12 +59,12 @@
       <input type="hidden" name="q" x-model="query">
     </form>
 
-    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+    <div class="flex flex-col sm:flex-row gap-4 mb-6">
       {# Search #}
       <div class="relative flex-1">
         <input id="search-input"
                placeholder="Search in collection..."
-               class="w-full py-2 pl-10 pr-4 bg-[#39404b] rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#4a9eff] appearance-none"
+               class="yt-input w-full !pl-10 appearance-none"
                type="text"
                x-model="query"
                autocomplete="off"
@@ -83,37 +83,15 @@
       <div class="flex items-center gap-2 flex-shrink-0">
         {# Filter by Status #}
         <div class="relative" x-data="{ open: false }">
-          <button class="h-10 flex items-center gap-2 px-4 bg-[#39404b] rounded-md hover:bg-[#454d5a] transition-colors cursor-pointer"
+          <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="24"
-                 height="24"
-                 viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 class="w-4 h-4">
-              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-            </svg>
-            <span class="text-sm" x-text="statusLabels[status] || status"></span>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="24"
-                 height="24"
-                 viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 class="w-4 h-4">
-              <path d="m6 9 6 6 6-6"></path>
-            </svg>
+            {% include "app/icons/funnel.svg" with classes="w-4 h-4" %}
+            <span x-text="statusLabels[status] || status"></span>
+            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute right-0 mt-2 py-1 w-48 bg-[#39404b] rounded-md shadow-lg overflow-hidden z-10 border border-gray-700"
+          <div class="yt-dropdown-popup absolute w-48"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -128,8 +106,8 @@
                       {% if items %}hx-target="#items-grid"{% else %}hx-target="this" hx-swap="none"{% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                      :class="status === '{{ value }}' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                      class="yt-dropdown-item w-full"
+                      :class="status === '{{ value }}' ? 'yt-dropdown-item-current' : ''"
                       @click="status = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
@@ -138,15 +116,15 @@
 
         {# Filter by Type #}
         <div class="relative" x-data="{ open: false }">
-          <button class="h-10 flex items-center gap-2 px-4 bg-[#39404b] rounded-md hover:bg-[#454d5a] transition-colors cursor-pointer"
+          <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
             {% include "app/icons/funnel.svg" with classes="w-4 h-4" %}
-            <span class="text-sm" x-text="getMediaTypeLabel(type)"></span>
-            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}
+            <span x-text="getMediaTypeLabel(type)"></span>
+            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute right-0 mt-2 py-1 w-48 bg-[#39404b] rounded-md shadow-lg overflow-hidden z-10 border border-gray-700"
+          <div class="yt-dropdown-popup absolute w-48"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -160,8 +138,8 @@
                     {% if items %}hx-target="#items-grid"{% else %}hx-target="this" hx-swap="none"{% endif %}
                     hx-include="#filter-form"
                     hx-indicator="#loading-indicator"
-                    class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                    :class="type === 'all' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                    class="yt-dropdown-item w-full"
+                    :class="type === 'all' ? 'yt-dropdown-item-current' : ''"
                     @click="type = 'all'; open = false"
                     type="button">All</button>
             {% for media_type in media_types %}
@@ -169,8 +147,8 @@
                       {% if items %}hx-target="#items-grid"{% else %}hx-target="this" hx-swap="none"{% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                      :class="type === '{{ media_type }}' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                      class="yt-dropdown-item w-full"
+                      :class="type === '{{ media_type }}' ? 'yt-dropdown-item-current' : ''"
                       @click="type = '{{ media_type }}'; open = false"
                       type="button">{{ media_type|media_type_readable_plural }}</button>
             {% endfor %}
@@ -179,16 +157,15 @@
 
         {# Sort by #}
         <div class="relative" x-data="{ open: false }">
-          <button class="h-10 flex items-center gap-2 px-4 bg-[#39404b] rounded-md hover:bg-[#454d5a] transition-colors cursor-pointer"
+          <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
             {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4" %}
-            <span class="text-sm"
-                  x-text="sort === 'date_added' ? 'Date Added' : (sort === 'title' ? 'Title' : 'Media Type')"></span>
-            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}
+            <span x-text="sort === 'date_added' ? 'Date Added' : (sort === 'title' ? 'Title' : 'Media Type')"></span>
+            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute right-0 mt-2 py-1 w-48 bg-[#39404b] rounded-md shadow-lg overflow-hidden z-10 border border-gray-700"
+          <div class="yt-dropdown-popup absolute w-48"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -203,8 +180,8 @@
                       {% if items %}hx-target="#items-grid"{% else %}hx-target="this" hx-swap="none"{% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer"
-                      :class="sort === '{{ value }}' ? 'bg-indigo-600 text-white font-medium' : 'text-gray-300 hover:bg-[#454d5a] hover:text-white'"
+                      class="yt-dropdown-item w-full"
+                      :class="sort === '{{ value }}' ? 'yt-dropdown-item-current' : ''"
                       @click="sort = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
