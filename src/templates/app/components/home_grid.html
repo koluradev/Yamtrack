@@ -1,7 +1,7 @@
 {% load app_tags %}
 
 {% for media in media_list.items %}
-  <div class="bg-[#2a2f35] rounded-lg overflow-hidden shadow-lg transition-all duration-300"
+  <div class="relative cursor-default overflow-hidden rounded-xl bg-gray-800 bg-cover outline-none ring-1 transition duration-300 shadow ring-gray-700 hover:shadow-lg hover:ring-gray-500 focus:shadow-lg focus:ring-gray-500"
        x-data="{ trackOpen: false, listsOpen: false, historyOpen: false }">
     <div class="relative">
       <a href="{{ media.item|media_url }}">
@@ -26,12 +26,12 @@
         </div>
       {% endif %}
 
-      <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover-tap:opacity-100{% if user.clickable_media_cards %} pointer-coarse:hidden{% endif %}">
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-800/40 to-gray-800/90 flex items-center justify-center opacity-0 hover-tap:opacity-100{% if user.clickable_media_cards %} pointer-coarse:hidden{% endif %}">
         <a href="{{ media.item|media_url }}" class="absolute inset-0"></a>
 
         <div class="relative flex items-center justify-center space-x-2.5">
           {# Track Button #}
-          <button class="p-2.5 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 hover:scale-110 hover:shadow-[0_0_15px_rgba(99,102,241,0.5)] transition-all duration-200 cursor-pointer"
+          <button class="yt-button-track flex items-center !p-2.5 !rounded-full"
                   title="Add to tracker"
                   hx-get="{% media_view_url 'track_modal' media.item %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "instance_id": "{{ media.id }}"}'
@@ -40,7 +40,7 @@
                   @click="trackOpen = true">{% include "app/icons/edit.svg" with classes="w-4 h-4" %}</button>
 
           {# Lists Button #}
-          <button class="p-2.5 bg-emerald-600 text-white rounded-full hover:bg-emerald-500 hover:scale-110 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-all duration-200 cursor-pointer"
+          <button class="yt-button-list flex items-center !p-2.5 !rounded-full"
                   title="Add to custom lists"
                   hx-get="{% media_view_url 'lists_modal' media.item %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -49,7 +49,7 @@
                   @click="listsOpen = true">{% include "app/icons/list-add.svg" with classes="w-4 h-4" %}</button>
 
           {# History Button #}
-          <button class="p-2.5 bg-amber-600 text-white rounded-full hover:bg-amber-500 hover:scale-110 hover:shadow-[0_0_15px_rgba(245,158,11,0.5)] transition-all duration-200 cursor-pointer"
+          <button class="yt-button-history flex items-center !p-2.5 !rounded-full"
                   title="View your activity history"
                   hx-get="{% media_view_url 'history_modal' media.item %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -57,15 +57,14 @@
                   hx-trigger="click once"
                   @click="historyOpen = true">{% include "app/icons/history.svg" with classes="w-4 h-4" %}</button>
         </div>
+
+        <div class="absolute left-0 right-0 bottom-0 p-3 text-md font-semibold text-white">
+          <span>{{ media }}</span>
+        </div>
       </div>
     </div>
 
     <div>
-      <div class="p-3 space-y-3">
-        <a href="{{ media.item|media_url }}"
-           class="text-sm font-semibold text-white hover:text-indigo-400 transition duration-300 line-clamp-1 text-center"
-           title="{{ media }}">{{ media }}</a>
-      </div>
       <div id="progress-{{ media.item.media_type }}-{{ media.id }}">
         {% include "app/components/progress_changer.html" with media=media user=user csrf_token=csrf_token MediaTypes=MediaTypes only %}
       </div>
@@ -74,7 +73,7 @@
     {# Track Modal #}
     <div x-show="trackOpen"
          @keydown.escape.window="trackOpen = false"
-         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         class="yt-modal-outer">
       <div class="w-152 max-h-[90vh] px-4 md:px-0 relative z-60"
            @click.outside="trackOpen = false">
         <div id="{% component_id 'track' media.item media.id %}"></div>
@@ -84,7 +83,7 @@
     {# Lists Modal #}
     <div x-show="listsOpen"
          @keydown.escape.window="listsOpen = false"
-         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         class="yt-modal-outer">
       <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
            @click.outside="listsOpen = false">
         <div id="{% component_id 'lists' media.item %}"></div>
@@ -94,7 +93,7 @@
     {# History Modal #}
     <div x-show="historyOpen"
          @keydown.escape.window="historyOpen = false"
-         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         class="yt-modal-outer">
       <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
            @click.outside="historyOpen = false">
         <div id="{% component_id 'history' media.item %}"></div>

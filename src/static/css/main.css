@@ -1811,6 +1811,9 @@
   .\!p-0 {
     padding: calc(var(--spacing) * 0) !important;
   }
+  .\!p-1 {
+    padding: calc(var(--spacing) * 1) !important;
+  }
   .\!p-2 {
     padding: calc(var(--spacing) * 2) !important;
   }
@@ -3115,6 +3118,11 @@
       opacity: 100%;
     }
   }
+  .disabled\:\!cursor-not-allowed {
+    &:disabled {
+      cursor: not-allowed !important;
+    }
+  }
   .disabled\:cursor-not-allowed {
     &:disabled {
       cursor: not-allowed;
@@ -3128,6 +3136,15 @@
   .disabled\:opacity-75 {
     &:disabled {
       opacity: 75%;
+    }
+  }
+  .disabled\:hover\:\!bg-gray-700 {
+    &:disabled {
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--color-gray-700) !important;
+        }
+      }
     }
   }
   .disabled\:hover\:bg-gray-700 {
