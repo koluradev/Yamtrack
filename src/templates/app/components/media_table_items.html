@@ -9,7 +9,7 @@
            class="lazyload min-w-10 w-10 h-10 object-cover rounded-md parent-hover-tap:hidden"
            data-src="{{ media.item.image }}"
            src="{{ IMG_NONE }}">
-      <button class="w-10 h-10 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-md transition-colors items-center justify-center hidden cursor-pointer parent-hover-tap:flex duration-150"
+      <button class="yt-button-track items-center !p-0 w-10 h-10 justify-center hidden parent-hover-tap:flex"
               hx-get="{% media_view_url 'track_modal' media.item %}"
               hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "instance_id": "{{ media.id }}"}'
               hx-target="#{% component_id 'track' media.item media.id %}"

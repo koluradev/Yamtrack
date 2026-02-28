@@ -88,7 +88,7 @@
       <div class="relative flex items-center justify-center space-x-2.5">
         {% if item.media_type == MediaTypes.EPISODE.value %}
           <button @click="trackOpen = true"
-                  class="p-2.5 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-full transition duration-150 ease-in-out cursor-pointer">
+                  class="yt-button-track flex items-center !p-2.5 !rounded-full">
             {% if media %}
               {% include "app/icons/eye.svg" with classes="w-4 h-4" %}
             {% else %}
@@ -97,7 +97,7 @@
           </button>
         {% else %}
           {# Track Button #}
-          <button class="p-2.5 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-full transition duration-150 ease-in-out cursor-pointer"
+          <button class="yt-button-track flex items-center !p-2.5 !rounded-full"
                   title="Add to tracker"
                   hx-get="{% media_view_url 'track_modal' item %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "instance_id": "{{ media.id }}"}'
@@ -107,7 +107,7 @@
         {% endif %}
 
         {# Lists Button #}
-        <button class="p-2.5 border bg-teal-600/80 border-teal-500 hover:bg-teal-600/100 hover:border-teal-500 active:bg-teal-700 active:border-teal-700 focus:ring-teal text-white rounded-full transition duration-150 ease-in-out cursor-pointer"
+        <button class="yt-button-list flex items-center !p-2.5 !rounded-full"
                 title="Add to custom lists"
                 hx-get="{% media_view_url 'lists_modal' item %}"
                 hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -116,7 +116,7 @@
                 @click="listsOpen = true">{% include "app/icons/list-add.svg" with classes="w-4 h-4" %}</button>
 
         {# History Button #}
-        <button class="p-2.5 border bg-amber-600/80 border-amber-500 hover:bg-amber-600/100 hover:border-amber-500 active:bg-amber-700 active:border-amber-700 focus:ring-amber text-white rounded-full transition duration-150 ease-in-out cursor-pointer"
+        <button class="yt-button-history flex items-center !p-2.5 !rounded-full"
                 title="View your activity history"
                 hx-get="{% media_view_url 'history_modal' item %}"
                 hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -136,7 +136,7 @@
       {# Track Modal #}
       <div x-show="trackOpen"
            @keydown.escape.window="trackOpen = false"
-           class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+           class="yt-modal-outer">
         <div class="w-152 max-h-[90vh] px-4 md:px-0 relative z-60"
              @click.outside="trackOpen = false">
           <div id="{% component_id 'track' item media.id %}"></div>
@@ -147,7 +147,7 @@
     {# Lists Modal #}
     <div x-show="listsOpen"
          @keydown.escape.window="listsOpen = false"
-         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         class="yt-modal-outer">
       <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
            @click.outside="listsOpen = false">
         <div id="{% component_id 'lists' item %}"></div>
@@ -157,7 +157,7 @@
     {# History Modal #}
     <div x-show="historyOpen"
          @keydown.escape.window="historyOpen = false"
-         class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         class="yt-modal-outer">
       <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
            @click.outside="historyOpen = false">
         <div id="{% component_id 'history' item %}"></div>

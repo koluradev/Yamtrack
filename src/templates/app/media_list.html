@@ -7,9 +7,7 @@
 {% endblock title %}
 
 {% block content %}
-  <h1 class="text-3xl sm:text-4xl font-bold mb-6 leading-8 sm:leading-12 bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-    {{ media_type|media_type_readable_plural }}
-  </h1>
+  <h1 class="yt-page-title">{{ media_type|media_type_readable_plural }}</h1>
 
   <div x-data="{ sort: '{{ current_sort }}', status: '{{ current_status }}', layout: '{{ current_layout }}', search: '{{ request.GET.search|default:'' }}', statusLabels: {
     {% for value, label in status_choices %}
@@ -33,11 +31,11 @@
       <input type="hidden" name="layout" x-model="layout">
     </form>
 
-    <div class="flex flex-col md:flex-row gap-2 mb-6">
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
       <!-- Search -->
       <div class="relative grow">
         <input placeholder="Search {{ media_type_plural }} in your list..."
-               class="w-full py-2 pl-10 pr-4 bg-gray-700 rounded-md text-white border border-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 appearance-none"
+               class="yt-input w-full !pl-10 appearance-none"
                type="text"
                x-model="search"
                hx-get="{% url 'medialist' media_type %}"
@@ -45,7 +43,7 @@
                {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
                hx-include="#filter-form"
                hx-indicator="#search-indicator">
-        {% include "app/icons/magnifying-glass.svg" with classes="w-6 h-6 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" %}
+        {% include "app/icons/magnifying-glass.svg" with classes="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" %}
         <div id="search-indicator"
              class="htmx-indicator absolute right-3 top-1/2 transform -translate-y-1/2">
           <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-indigo-500"></div>
@@ -55,15 +53,15 @@
       <div class="flex gap-2 flex-wrap">
         <!-- Filter by Status -->
         <div class="relative" x-data="{ open: false }">
-          <button class="flex items-center px-4 py-2 border border-gray-500 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors duration-200 cursor-pointer"
+          <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
-            {% include "app/icons/funnel.svg" with classes="w-4 h-4 mr-2" %}
+            {% include "app/icons/funnel.svg" with classes="w-4 h-4" %}
             <span x-text="statusLabels[status] || status"></span>
             {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute z-10 mt-2 py-1 w-48 rounded-md shadow-lg border border-gray-700 bg-gray-800/80 backdrop-blur overflow-hidden"
+          <div class="yt-dropdown-popup absolute w-48"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -78,8 +76,8 @@
                       {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer text-white rounded-xs"
-                      :class="status === '{{ value }}' ? 'bg-gradient-to-br from-purple-500 to-purple-700 font-medium' : 'hover:bg-gray-600'"
+                      class="yt-dropdown-item w-full"
+                      :class="status === '{{ value }}' ? 'yt-dropdown-item-current' : ''"
                       @click="status = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
@@ -88,15 +86,15 @@
 
         <!-- Sort by -->
         <div class="relative" x-data="{ open: false }">
-          <button class="flex items-center px-4 py-2 border border-gray-500 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors duration-200 cursor-pointer"
+          <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
-            {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4 mr-2" %}
+            {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4" %}
             <span x-text="sortLabels[sort] || sort"></span>
             {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
           </button>
 
-          <div class="absolute z-10 mt-2 py-1 w-48 rounded-md shadow-lg border border-gray-700 bg-gray-800/80 backdrop-blur overflow-hidden"
+          <div class="yt-dropdown-popup absolute w-48"
                x-cloak
                x-show="open"
                @click.outside="open = false"
@@ -111,8 +109,8 @@
                       {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
                       hx-include="#filter-form"
                       hx-indicator="#loading-indicator"
-                      class="block w-full px-4 py-2 text-left text-sm transition-colors cursor-pointer text-white rounded-xs"
-                      :class="sort === '{{ value }}' ? 'bg-gradient-to-br from-purple-500 to-purple-700 font-medium' : 'hover:bg-gray-600'"
+                      class="yt-dropdown-item w-full"
+                      :class="sort === '{{ value }}' ? 'yt-dropdown-item-current' : ''"
                       @click="sort = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
@@ -120,15 +118,15 @@
         </div>
 
         <!-- Layout Toggle -->
-        <div class="flex rounded-md overflow-hidden border border-gray-500">
+        <div class="flex rounded-md overflow-hidden">
           <a :href="`{% url 'medialist' media_type %}?${search ? 'search=' + search + '&' : ''}${status !== 'all' ? 'status=' + status + '&' : ''}${sort !== 'score' ? 'sort=' + sort + '&' : ''}layout=grid`"
-             class="p-2 pt-2.5 cursor-pointer transition-colors duration-200"
-             :class="layout === 'grid' ? 'bg-gradient-to-br from-purple-500 to-purple-700 text-white' : 'bg-gray-700 hover:bg-gray-600'"
+             class="!pt-2.5 !rounded-r-none !px-3"
+             :class="layout === 'grid' ? 'yt-button-primary z-2' : 'yt-button -mr-px'"
              title="Grid View"
              @click="layout = 'grid'">{% include "app/icons/four-square.svg" with classes="w-5 h-5" %}</a>
           <a :href="`{% url 'medialist' media_type %}?${search ? 'search=' + search + '&' : ''}${status !== 'all' ? 'status=' + status + '&' : ''}${sort !== 'score' ? 'sort=' + sort + '&' : ''}layout=table`"
-             class="p-2 pt-2.5 cursor-pointer transition-colors duration-200"
-             :class="layout === 'table' ? 'bg-gradient-to-br from-purple-500 to-purple-700 text-white' : 'bg-gray-700 hover:bg-gray-600'"
+             class="!pt-2.5 !rounded-l-none !px-3"
+             :class="layout === 'table' ? 'yt-button-primary z-2' : 'yt-button -ml-px'"
              title="Table View"
              @click="layout = 'table'">{% include "app/icons/table.svg" with classes="w-5 h-5" %}</a>
         </div>
@@ -143,10 +141,7 @@
           <p class="text-gray-400 mb-6">
             Start tracking your {{ media_type_plural }} to keep a record of what you've {{ media_type|media_past_verb }}.
           </p>
-          <a href="{{ media_type|sample_search }}"
-             class="px-4 py-2 border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-indigo text-white rounded-md transition-colors duration-200">
-            Browse {{ media_type|media_type_readable_plural }}
-          </a>
+          <a href="{{ media_type|sample_search }}" class="yt-button-track">Browse {{ media_type|media_type_readable_plural }}</a>
         </div>
       </div>
     {% elif current_layout == "grid" %}

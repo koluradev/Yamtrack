@@ -17,7 +17,7 @@
            src="{{ media.image }}">
 
       <div x-data="{ trackOpen: false }">
-        <button class="mt-4 p-3 rounded-lg w-full flex items-center text-white transition duration-300 cursor-pointer border {% if user_medias %}bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 hover:border-indigo-500 active:bg-indigo-700 active:border-indigo-700 focus:ring-blue{% else %}bg-gray-600/80 border-gray-500 hover:bg-gray-600/100 hover:border-gray-500 active:bg-gray-700 active:border-gray-700 focus:ring-gray{% endif %}"
+        <button class="mt-4 w-full flex items-center {% if user_medias %}yt-button-track{% else %}yt-button-gray{% endif %} !rounded-lg"
                 hx-get="{% media_view_url 'track_modal' media %}"
                 hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "instance_id": "{{ current_instance.id }}"}'
                 hx-target="#{% component_id 'track' media current_instance.id %}"
@@ -38,7 +38,7 @@
         {# Track Modal #}
         <div x-show="trackOpen"
              @keydown.escape.window="trackOpen = false"
-             class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+             class="yt-modal-outer">
           <div class="w-152 max-h-[90vh] px-4 md:px-0 relative z-60"
                @click.outside="trackOpen = false"
                @click.stop>
@@ -64,8 +64,7 @@
                x-data="{ open: false }"
                @click.away="open = false"
                @keydown.escape.window="open = false">
-            <button @click="open = !open"
-                    class="flex items-center space-x-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors duration-200 cursor-pointer">
+            <button @click="open = !open" class="yt-dropdown flex items-center">
               <span class="text-sm font-medium">{{ media.season_title }}</span>
               <div class="w-4 h-4" :class="{ 'rotate-180': open }">{% include "app/icons/chevron-down.svg" %}</div>
             </button>
@@ -76,17 +75,14 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100 transform scale-100"
                  x-transition:leave-end="opacity-0 transform scale-95"
-                 class="absolute right-1/2 md:right-0 translate-x-1/2 md:translate-x-0 mt-2 w-64 bg-[#2a2f35] rounded-md shadow-lg overflow-hidden z-10">
+                 class="yt-dropdown-popup absolute right-1/2 md:right-0 translate-x-1/2 md:translate-x-0 w-64">
               <div class="max-h-[300px] overflow-y-auto">
                 {% for tv_season in tv.related.seasons %}
                   <a href="{% url 'season_details' source=media.source media_id=media.media_id title=media.title|slug season_number=tv_season.season_number %}"
-                     class="w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-700 transition-colors duration-200 cursor-pointer {% if tv_season.season_number == media.season_number %}bg-[#343a40]{% endif %}">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-600 text-white">
-                      {{ tv_season.season_number }}
-                    </div>
+                     class="yt-dropdown-item w-full space-x-3 {% if tv_season.season_number == media.season_number %}yt-dropdown-item-current{% endif %}">
                     <div class="flex-1 text-left">
                       <div class="text-sm font-medium">{{ tv_season.season_title }}</div>
-                      <div class="text-xs text-gray-400">
+                      <div class="text-xs text-gray-300">
                         {{ tv_season.max_progress }} Episode{{ tv_season.max_progress|pluralize }}
                         {% if tv_season.first_air_date %}• {{ tv_season.first_air_date }}{% endif %}
                       </div>
@@ -103,9 +99,7 @@
 
       {# Genres #}
       <div class="flex flex-wrap gap-2 mb-4">
-        {% for genre in media.genres %}
-          <span class="px-3 py-1 border border-violet-700 bg-violet-800/90 text-white rounded-full text-sm">{{ genre }}</span>
-        {% endfor %}
+        {% for genre in media.genres %}<span class="yt-chip-violet px-3 py-1 text-sm">{{ genre }}</span>{% endfor %}
       </div>
 
       {# Description #}
@@ -147,7 +141,7 @@
       {# Source score #}
       <div class="flex flex-wrap gap-4">
         {% if media.score_count is not None %}
-          <div class="border border-gray-700 bg-gray-900 p-3 rounded-lg w-[120px]">
+          <div class="yt-container-light p-3 w-[120px]">
             <h3 class="text-xs font-semibold text-gray-400 mb-1 text-center">{{ media.source|upper }} SCORE</h3>
             <div class="flex items-center justify-center">
               {% include "app/icons/star.svg" with classes="w-5 h-5 mr-1.5 text-yellow-400 fill-yellow-400" %}
@@ -169,7 +163,7 @@
                class="relative">
             <!-- Rating display -->
             <div @click="showRatingPopup = !showRatingPopup"
-                 class="border border-gray-700 bg-gray-900 p-3 rounded-lg w-[120px] cursor-pointer">
+                 class="yt-container-light p-3 w-[120px] cursor-pointer">
               <h3 class="text-xs font-semibold text-gray-400 mb-1 text-center">YOUR SCORE</h3>
               <div class="flex items-center justify-center">
                 {% include "app/icons/star.svg" with classes="w-5 h-5 mr-1.5 text-yellow-400 fill-yellow-400" %}
@@ -229,7 +223,7 @@
 
           {% if media_type != MediaTypes.TV.value and media_type != MediaTypes.SEASON.value %}
             <div x-data="{ trackOpen: false }">
-              <button class="p-2  text-white rounded-md bg-indigo-600 hover:bg-indigo-700 transition-colors cursor-pointer"
+              <button class="yt-button-track flex items-center"
                       hx-get="{% media_view_url 'track_modal' media %}"
                       hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "is_create": true}'
                       hx-target="#{% component_id 'track' media %}"
@@ -240,7 +234,7 @@
               {# Track Modal #}
               <div x-show="trackOpen"
                    @keydown.escape.window="trackOpen = false"
-                   class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                   class="yt-modal-outer">
                 <div class="w-152 max-h-[90vh] px-4 md:px-0 relative z-60"
                      @click.outside="trackOpen = false">
                   <div id="{% component_id 'track' media %}"></div>
@@ -251,7 +245,7 @@
         </div>
 
         <div class="space-y-4 mb-6">
-          <div class="border border-gray-700 bg-gray-900 p-4 rounded-lg text-center md:text-start">
+          <div class="yt-container-light p-4 text-center md:text-start">
             <div class="@container flex flex-col gap-y-1">
               {% if current_instance.start_date %}
                 <div class="flex @max-[210px]:flex-col justify-between text-sm">
@@ -282,7 +276,7 @@
           {% if user_medias|length > 1 %}
             <div x-data="{ showRepeats: false }">
               <button @click="showRepeats = !showRepeats"
-                      class="group flex items-center justify-center w-full px-3 py-2 text-sm text-white bg-gray-600 hover:bg-gray-700 transition-all duration-200 rounded-lg tracking-wide cursor-pointer">
+                      class="yt-button flex items-center group justify-center w-full text-sm tracking-wide">
                 <div class="lucide lucide-chevron-down w-4 h-4 mr-2 transition-transform"
                      :class="{ 'rotate-180': showRepeats }">{% include "app/icons/chevron-down.svg" %}</div>
                 Show Repeats ({{ user_medias|length|add:"-1" }})
@@ -290,7 +284,7 @@
 
               <div x-show="showRepeats" class="space-y-2 mt-4">
                 {% for user_media in user_medias|slice:"1:" %}
-                  <div class="bg-[#2a2f35] p-4 rounded-lg">
+                  <div class="border border-gray-700 bg-gray-900 p-4 rounded-lg">
                     <div class="flex items-center justify-between mb-2">
                       <div class="flex items-center">
                         {% if user_media.score %}
@@ -317,7 +311,7 @@
 
                         <div x-show="trackOpen"
                              @keydown.escape.window="trackOpen = false"
-                             class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                             class="yt-modal-outer">
                           <div class="w-152 max-h-[90vh] px-4 md:px-0 relative z-60"
                                @click.outside="trackOpen = false">
                             <div id="{% component_id 'track' media user_media.id %}"></div>
@@ -374,10 +368,10 @@
 
       {# Actions #}
       <h2 class="text-xl font-bold mb-4">Actions</h2>
-      <div class="border border-gray-700 bg-gray-900 p-4 md:p-2 lg:p-4 rounded-lg flex items-center justify-center gap-x-5 md:gap-x-2 lg:gap-x-5 mb-6">
+      <div class="yt-container-light p-4 md:p-2 lg:p-4 flex items-center justify-center gap-x-5 md:gap-x-2 lg:gap-x-5 mb-6">
         {# Custom Lists #}
         <div x-data="{ listsOpen: false }">
-          <button class="px-4 py-2 text-white rounded-md border bg-teal-600/80 border-teal-500 hover:bg-teal-600/100 hover:border-teal-500 active:bg-teal-700 active:border-teal-700 focus:ring-teal transition duration-300 cursor-pointer"
+          <button class="yt-button-list flex items-center"
                   title="Add to custom lists"
                   hx-get="{% media_view_url 'lists_modal' media %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -387,7 +381,7 @@
 
           <div x-show="listsOpen"
                @keydown.escape.window="listsOpen = false"
-               class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+               class="yt-modal-outer">
             <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
                  @click.outside="listsOpen = false">
               <div id="{% component_id 'lists' media %}"></div>
@@ -397,7 +391,7 @@
 
         {# Activity History #}
         <div x-data="{ historyOpen: false }">
-          <button class="px-4 py-2 text-white rounded-md border bg-amber-600/80 border-amber-500 hover:bg-amber-600/100 hover:border-amber-500 active:bg-amber-700 active:border-amber-700 focus:ring-amber transition duration-300 cursor-pointer"
+          <button class="yt-button-history flex items-center"
                   title="View your activity history"
                   hx-get="{% media_view_url 'history_modal' media %}"
                   hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -407,7 +401,7 @@
 
           <div x-show="historyOpen"
                @keydown.escape.window="historyOpen = false"
-               class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+               class="yt-modal-outer">
             <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
                  @click.outside="historyOpen = false">
               <div id="{% component_id 'history' media %}"></div>
@@ -418,7 +412,7 @@
         {# Sync metadata #}
         <button type="button"
                 title="Sync metadata with provider"
-                class="px-4 py-2 text-white rounded-md border bg-fuchsia-600/80 border-fuchsia-500 hover:bg-fuchsia-600/100 hover:border-fuchsia-500 active:bg-fuchsia-700 active:border-fuchsia-700 focus:ring-fuchsia transition duration-300 cursor-pointer disabled:opacity-75"
+                class="yt-button-primary flex items-center disabled:opacity-75"
                 hx-post="{% media_view_url 'sync_metadata' media %}"
                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                 hx-vals='{"next": "{{ request.get_full_path|urlencode }}"}'
@@ -436,7 +430,7 @@
       {# Media Details #}
       <h2 class="text-xl font-bold mb-4">Details</h2>
       {% if watch_provider_region == "UNSET" or watch_providers is not None %}
-        <div class="border border-gray-700 bg-gray-900 p-4 rounded-lg my-4">
+        <div class="yt-container-light p-4 my-4">
           <h3 class="text-sm font-semibold text-gray-400 mb-2">STREAMING</h3>
           <div class="flex flex-wrap items-center gap-x-5 gap-y-3 place-content-flex-start">
             {% if watch_provider_region == "UNSET" %}
@@ -444,7 +438,7 @@
               <p class="text-sm">
                 Watch provider region is not configured. Set a region or disable this feature in the
                 <a href="{{ preferences_url }}"
-                   class="hover:text-indigo-500 hover:underline">preferences</a>.
+                   class="hover:text-purple-400 hover:underline">preferences</a>.
               </p>
             {% elif watch_providers %}
               {% for provider in watch_providers %}
@@ -460,7 +454,7 @@
         </div>
       {% endif %}
 
-      <div class="border border-gray-700 bg-gray-900 p-4 rounded-lg text-center md:text-start">
+      <div class="yt-container-light p-4 text-center md:text-start">
         {% if media.details.items %}
           {% for key, value in media.details.items %}
             <div class="mb-4">
@@ -475,7 +469,7 @@
           <div>
             <h3 class="text-sm font-semibold text-gray-400">SOURCE</h3>
             <a href="{{ media.source_url }}"
-               class="text-gray-200 hover:text-indigo-500 transition-colors duration-200"
+               class="text-gray-200 hover:text-purple-400 transition-colors duration-200"
                target="_blank">{{ media.source|source_readable }}</a>
           </div>
           {% if media.external_links %}
@@ -483,7 +477,7 @@
               <h3 class="text-sm font-semibold text-gray-400">EXTERNAL LINKS</h3>
               {% for name, url in media.external_links.items %}
                 <a href="{{ url }}"
-                   class="text-gray-200 hover:text-indigo-500 transition-colors duration-200 block"
+                   class="text-gray-200 hover:text-purple-400 transition-colors duration-200 block"
                    target="_blank">{{ name }}</a>
               {% endfor %}
             </div>
@@ -539,13 +533,13 @@
           <h2 class="text-xl font-bold mb-4">Episodes</h2>
           <div class="space-y-6">
             {% for episode in media.episodes %}
-              <div class="bg-[#2a2f35] rounded-lg overflow-hidden shadow-lg">
+              <div class="yt-container-light overflow-hidden shadow-lg">
                 <div class="flex flex-col md:flex-row">
                   <img src="{{ IMG_NONE }}"
                        alt="E{{ episode.episode_number }}"
                        data-src="{{ episode.image }}"
-                       class="lazyload md:w-64 md:h-40 shrink-0 {% if episode.image != IMG_NONE %}object-cover{% endif %}">
-                  <div class="py-3 flex-1 flex flex-col">
+                       class="lazyload md:w-64 md:h-42 shrink-0 {% if episode.image != IMG_NONE %}object-cover{% endif %}">
+                  <div class="py-4 flex-1 flex flex-col">
                     <div class="flex-1">
                       <div class="flex justify-between items-start mb-2 space-x-2 px-4">
                         <div>
@@ -555,12 +549,12 @@
                             {% if episode.runtime %}• {{ episode.runtime }}{% endif %}
                           </p>
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex space-x-2.5">
                           {# Track Episode #}
                           <div x-data="{ trackOpen: false }">
                             <button @click="trackOpen = true"
                                     title="Track Episode"
-                                    class="p-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300 cursor-pointer">
+                                    class="yt-button-track flex items-center !p-2 !rounded-full">
                               {% if episode.history %}
                                 {% include "app/icons/eye.svg" with classes="w-4 h-4" %}
                               {% else %}
@@ -574,7 +568,7 @@
 
                           {# Lists #}
                           <div x-data="{ listsOpen: false }">
-                            <button class="p-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full transition duration-300 cursor-pointer"
+                            <button class="yt-button-list flex items-center !p-2 !rounded-full"
                                     title="Add to custom lists"
                                     hx-get="{% media_view_url 'lists_modal' episode %}"
                                     hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -586,7 +580,7 @@
 
                             <div x-show="listsOpen"
                                  @keydown.escape.window="listsOpen = false"
-                                 class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                                 class="yt-modal-outer">
                               <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
                                    @click.outside="listsOpen = false">
                                 <div id="{% component_id 'lists' episode %}"></div>
@@ -596,7 +590,7 @@
 
                           {# History #}
                           <div x-data="{ historyOpen: false }">
-                            <button class="p-2 bg-amber-600 hover:bg-amber-700 text-white rounded-full transition duration-300 cursor-pointer"
+                            <button class="yt-button-history flex items-center !p-2 !rounded-full"
                                     title="View your activity history"
                                     hx-get="{% media_view_url 'history_modal' episode %}"
                                     hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}"}'
@@ -607,7 +601,7 @@
                             </button>
                             <div x-show="historyOpen"
                                  @keydown.escape.window="historyOpen = false"
-                                 class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                                 class="yt-modal-outer">
                               <div class="w-96 max-h-[90vh] px-4 md:px-0 relative z-60"
                                    @click.outside="historyOpen = false">
                                 <div id="{% component_id 'history' episode %}"></div>
