@@ -1,4 +1,5 @@
-@import "tailwindcss" source("../../");
+@import "tailwindcss";
+@source "../../";
 
 @theme {
   --breakpoint-xs: 30rem;
@@ -30,10 +31,73 @@
   @apply grid grid-cols-2 xs:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4;
 }
 
+/** Custom Styles **/
+.yt-button {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-gray-700 border-gray-500 hover:bg-gray-600 active:bg-gray-700 active:border-gray-700;
+}
+.yt-button-primary {
+ @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-purple-600/80 border-purple-500 hover:bg-purple-600/100 active:bg-purple-700 active:border-purple-700;
+}
+.yt-button-track {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 active:bg-indigo-700 active:border-indigo-700;
+}
+.yt-button-list {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-teal-600/80 border-teal-500 hover:bg-teal-600/100 active:bg-teal-700 active:border-teal-700;
+}
+.yt-button-history {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-amber-600/80 border-amber-500 hover:bg-amber-600/100 active:bg-amber-700 active:border-amber-700;
+}
+.yt-button-delete {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-red-600/80 border-red-500 hover:bg-red-600/100 active:bg-red-700 active:border-red-700;
+}
+.yt-button-disabled {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-not-allowed text-gray-300 border bg-gray-600/80 border-gray-500 hover:bg-gray-600/100 active:bg-gray-700 active:border-gray-700;
+}
+
+.yt-input {
+  @apply px-4 py-2 rounded-md transition duration-200 text-white border bg-gray-700 border-gray-500 hover:bg-gray-600 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600;
+}
+
+.yt-dropdown {
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer space-x-2 border border-gray-500 bg-gray-700 hover:bg-gray-600;
+}
+.yt-dropdown-popup {
+  @apply mt-2 px-1 pt-1 rounded-md shadow-lg border border-gray-700 bg-gray-800/80 backdrop-blur overflow-hidden z-10;
+}
+.yt-dropdown-item {
+  @apply flex items-center px-4 py-2 mb-1 rounded-sm transition-colors duration-200 cursor-pointer border border-transparent hover:border-gray-500 hover:bg-gray-600/90;
+}
+.yt-dropdown-item-current {
+  @apply border-purple-500 bg-purple-600/90 hover:border-purple-500 hover:bg-purple-600/90;
+}
+
+.yt-container-light {
+  @apply border border-gray-700 bg-gray-900 rounded-lg;
+}
+
+.yt-modal-outer {
+  @apply fixed inset-0 bg-gray-950/50 flex items-center justify-center z-50;
+}
+.yt-modal-bg {
+  @apply p-6 max-h-[70svh] rounded-lg bg-gray-800/80 shadow-xl ring-1 ring-gray-700 backdrop-blur overflow-y-auto;
+}
+
+.yt-chip-violet {
+  @apply border border-violet-700 bg-violet-800/90 text-white rounded-full;
+}
+
+.yt-page-title {
+  @apply text-3xl sm:text-4xl font-bold mb-6 leading-8 sm:leading-12 bg-gradient-to-br from-indigo-400 to-purple-400 bg-clip-text text-transparent;
+}
+.yt-page-subtitle {
+  @apply text-gray-400;
+}
+
 /* https://tailwindcss.com/docs/upgrade-guide#hover-styles-on-mobile */
 @custom-variant hover-tap (&:hover);
 @custom-variant parent-hover-tap (.hover-tap:hover &);
 
+/** Toast **/
 .toast-error {
   @apply bg-red-700/95 border-red-600;
 }
@@ -54,7 +118,7 @@
   @apply min-w-full;
 }
 
-/* Dropdown */
+/** Dropdown **/
 .select2-container--tailwindcss-4.select2-container--open .select2-dropdown {
   @apply w-full mt-1 overflow-auto rounded-md text-base bg-[#39404b] border-gray-600 border focus-within:border-indigo-500 focus-within:ring focus-within:ring-indigo-200/50;
 }
