@@ -208,7 +208,7 @@
                       <button type="button"
                               @click="isOpen = !isOpen"
                               @click.away="isOpen = false"
-                              class="flex items-center justify-between max-w-[110px] sm:max-w-none sm:w-32 px-2 sm:px-4 py-2 text-sm text-gray-300 border border-gray-600 hover:border-gray-500 bg-gray-900/80 focus:bg-gray-900/100 rounded-r-full focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 transition-colors duration-200 cursor-pointer">
+                              class="flex items-center justify-between max-w-[110px] sm:max-w-none sm:w-34 px-2 sm:px-4 py-2 text-sm text-gray-300 border border-gray-600 hover:border-gray-500 bg-gray-900/80 focus:bg-gray-900/100 rounded-r-full focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 transition-colors duration-200 cursor-pointer">
                         <span class="truncate sm:whitespace-normal" x-text="selectedType.display"></span>
                         {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
 
@@ -222,10 +222,10 @@
                           x-transition:leave="transition ease-in duration-75"
                           x-transition:leave-start="transform opacity-100 scale-100"
                           x-transition:leave-end="transform opacity-0 scale-95"
-                          class="absolute z-20 py-1 mt-12 overflow-auto text-sm text-white rounded-md shadow-lg border border-gray-700 bg-gray-800/90 backdrop-blur right-0 w-32">
+                          class="absolute z-20 px-1 pt-1 mt-12 overflow-auto text-sm text-white rounded-md shadow-lg border border-gray-700 bg-gray-800/90 backdrop-blur right-0 w-32">
                         <template x-for="type in mediaTypes" :key="type.value">
                           <li @click="selectedType = type; isOpen = false"
-                              class="px-4 py-2 cursor-pointer hover:bg-gray-600 transition duration-150 ease-in-out"
+                              class="px-4 py-2 mb-1 cursor-pointer border border-transparent rounded-sm hover:border-gray-500 hover:bg-gray-600/90 transition duration-150 ease-in-out"
                               x-text="type.display"></li>
                         </template>
                       </ul>
