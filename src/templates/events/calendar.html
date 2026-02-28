@@ -7,20 +7,22 @@
 
 {% block content %}
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2">Calendar</h1>
-    <p class="text-gray-400">Track upcoming releases from your list.</p>
+    <h1 class="yt-page-title">Calendar</h1>
+    <p class="yt-page-subtitle">Track upcoming releases from your list.</p>
   </div>
 
-  <div class="bg-[#2a2f35] rounded-lg p-6 mb-6">
+  <div class="yt-container-light p-5 mb-6">
     <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
       <div class="flex items-center gap-4">
-        <div class="flex items-center bg-[#39404b] rounded-md p-1">
-          <a class="p-2 hover:bg-[#454d5a] rounded-md transition-colors"
+        <div class="flex items-center">
+          <a class="yt-button !py-2.5 !rounded-r-none !px-2 !border-r-0"
              href="{% url 'calendar' %}?month={{ prev_month }}&year={{ prev_year }}&view={{ view_type }}">
             {% include "app/icons/chevron-left.svg" with classes="w-5 h-5" %}
           </a>
-          <h2 class="px-4 text-lg font-semibold min-w-40 text-center">{{ month_name }} {{ year }}</h2>
-          <a class="p-2 hover:bg-[#454d5a] rounded-md transition-colors"
+          <h2 class="px-4 py-1.5 border-t border-b bg-gray-700 border-gray-500 text-lg font-semibold min-w-40 text-center">
+            {{ month_name }} {{ year }}
+          </h2>
+          <a class="yt-button !py-2.5 !rounded-l-none !px-2 !border-l-0"
              href="{% url 'calendar' %}?month={{ next_month }}&year={{ next_year }}&view={{ view_type }}">
             {% include "app/icons/chevron-right.svg" with classes="w-5 h-5" %}
           </a>
@@ -28,31 +30,31 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <a class="px-4 py-2 text-sm bg-[#39404b] hover:bg-[#454d5a] rounded-md transition-colors"
+        <a class="yt-button"
            href="{% url 'calendar' %}?month={{ today.month }}&year={{ today.year }}&view={{ view_type }}">Today</a>
 
         <form method="post" action="{% url 'reload_calendar' %}">
           {% csrf_token %}
-          <button class="px-4 py-2 text-sm bg-[#39404b] hover:bg-[#454d5a] rounded-md transition-colors flex items-center gap-2 cursor-pointer">
+          <button class="yt-button flex items-center gap-2">
             {% include "app/icons/circle-spinning-clockwise.svg" with classes="w-4 h-4" %}
             <span>Fetch New Releases</span>
           </button>
         </form>
 
-        <div class="bg-[#39404b] rounded-md p-1 space-x-0.5 flex">
-          <a class="p-2 rounded-md transition-colors cursor-pointer {% if view_type == 'grid' %}bg-indigo-600 text-white{% else %}hover:bg-[#454d5a]{% endif %}"
+        <div class="flex rounded-md overflow-hidden">
+          <a class="!py-2.5 !rounded-r-none !px-3 {% if view_type == 'grid' %}yt-button-primary z-2{% else %}yt-button -mr-px{% endif %}"
              href="{% url 'calendar' %}?month={{ month }}&year={{ year }}&view=grid">
-            {% include "app/icons/grid.svg" with classes="w-4 h-4" %}
+            {% include "app/icons/grid.svg" with classes="w-5 h-5" %}
           </a>
-          <a class="p-2 rounded-md transition-colors cursor-pointer {% if view_type == 'list' %}bg-indigo-600 text-white{% else %}hover:bg-[#454d5a]{% endif %}"
+          <a class="!pt-2.5 !rounded-l-none !px-3 {% if view_type == 'list' %}yt-button-primary z-2{% else %}yt-button -ml-px{% endif %}"
              href="{% url 'calendar' %}?month={{ month }}&year={{ year }}&view=list">
-            {% include "app/icons/list.svg" with classes="w-4 h-4" %}
+            {% include "app/icons/list.svg" with classes="w-5 h-5" %}
           </a>
         </div>
 
-        <a class="p-3 text-sm bg-[#39404b] hover:bg-[#454d5a] rounded-md transition-colors"
+        <a class="yt-button !py-2.5 !px-3"
            href="{% url 'download_calendar' token=user.token %}">
-          {% include "app/icons/download.svg" with classes="w-4 h-4" %}
+          {% include "app/icons/download.svg" with classes="w-5 h-5" %}
         </a>
       </div>
     </div>
@@ -64,7 +66,7 @@
     {% endif %}
   </div>
 
-  <div class="bg-[#2a2f35] p-5 rounded-lg mb-6">
+  <div class="yt-container-light p-5 mb-6">
     <div class="flex items-center mb-3">
       {% include "app/icons/link.svg" with classes="w-5 h-5 text-indigo-400 mr-2" %}
       <h3 class="text-base font-medium">Export link</h3>
@@ -72,9 +74,9 @@
     <p class="text-gray-400 mb-4 text-sm">
       This link can be used to integrate your calendar into any of your calendar applications.
     </p>
-    <div class="bg-[#262a2f] p-3 rounded-md mb-4">
+    <div class="mb-4">
       <input readonly=""
-             class="w-full py-2 px-3 bg-[#262a2f] rounded-md text-gray-300 text-sm border-0 focus:ring-0 outline-none font-mono"
+             class="yt-input w-full font-mono"
              type="text"
              value="{{ request.scheme }}://{{ request.get_host }}{% url 'download_calendar' token=user.token %}">
     </div>

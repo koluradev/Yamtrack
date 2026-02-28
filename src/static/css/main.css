@@ -1273,6 +1273,10 @@
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
   }
+  .\!border-r-0 {
+    border-right-style: var(--tw-border-style) !important;
+    border-right-width: 0px !important;
+  }
   .border-r {
     border-right-style: var(--tw-border-style);
     border-right-width: 1px;
@@ -1284,6 +1288,10 @@
   .border-b-2 {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 2px;
+  }
+  .\!border-l-0 {
+    border-left-style: var(--tw-border-style) !important;
+    border-left-width: 0px !important;
   }
   .border-l {
     border-left-style: var(--tw-border-style);
@@ -1469,6 +1477,9 @@
   }
   .bg-fuchsia-400 {
     background-color: var(--color-fuchsia-400);
+  }
+  .bg-fuchsia-600 {
+    background-color: var(--color-fuchsia-600);
   }
   .bg-fuchsia-600\/80 {
     background-color: color-mix(in srgb, oklch(59.1% 0.293 322.896) 80%, transparent);
@@ -1680,6 +1691,9 @@
       background-color: color-mix(in oklab, var(--color-teal-600) 80%, transparent);
     }
   }
+  .bg-violet-800 {
+    background-color: var(--color-violet-800);
+  }
   .bg-violet-800\/90 {
     background-color: color-mix(in srgb, oklch(43.2% 0.232 292.759) 90%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1827,6 +1841,9 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
+  .\!px-2 {
+    padding-inline: calc(var(--spacing) * 2) !important;
+  }
   .\!px-3 {
     padding-inline: calc(var(--spacing) * 3) !important;
   }
@@ -1850,6 +1867,15 @@
   }
   .\!py-1 {
     padding-block: calc(var(--spacing) * 1) !important;
+  }
+  .\!py-2 {
+    padding-block: calc(var(--spacing) * 2) !important;
+  }
+  .\!py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5) !important;
+  }
+  .\!py-3 {
+    padding-block: calc(var(--spacing) * 3) !important;
   }
   .py-0 {
     padding-block: calc(var(--spacing) * 0);
