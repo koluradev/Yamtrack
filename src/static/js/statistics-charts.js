@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     maintainAspectRatio: false,
     plugins: {
       datalabels: {
-        color: "#D1D5DB",
+        color: "#e5e7eb",
         font: { size: 12 },
         formatter: (value, ctx) => {
           const total = ctx.dataset.data.reduce((acc, data) => acc + data, 0);
@@ -173,8 +173,9 @@ document.addEventListener("DOMContentLoaded", function () {
       legend: {
         position: "bottom",
         labels: {
-          color: "#D1D5DB",
+          color: "#e5e7eb",
           padding: 20,
+          font: { size: 14 },
           usePointStyle: true,
           pointStyle: "rectRounded",
           generateLabels: function (chart) {
@@ -199,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     elements: {
       arc: {
         borderWidth: 1,
-        borderColor: "#d3d3d3",
+        borderColor: "#9ca3af",
       },
     },
   };
@@ -212,20 +213,20 @@ document.addEventListener("DOMContentLoaded", function () {
       x: {
         stacked: true,
         grid: { color: "rgba(255, 255, 255, 0.1)" },
-        ticks: { color: "#D1D5DB" },
+        ticks: { color: "#e5e7eb" },
       },
       y: {
         stacked: true,
         beginAtZero: true,
         grid: { color: "rgba(255, 255, 255, 0.1)" },
-        ticks: { color: "#D1D5DB", precision: 0 },
+        ticks: { color: "#e5e7eb", precision: 0 },
       },
     },
     plugins: {
       legend: {
         position: "bottom",
         labels: {
-          color: "#D1D5DB",
+          color: "#e5e7eb",
           padding: 20,
           boxWidth: 12,
           boxHeight: 12,
@@ -233,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pointStyle: "rectRounded",
           textAlign: "center",
           font: {
-            size: 12,
+            size: 14,
             lineHeight: 0.1,
           },
         },
