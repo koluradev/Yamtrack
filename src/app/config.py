@@ -5,60 +5,70 @@ from app.models import MediaTypes, Sources, Status
 
 # --- Color Constants ---
 COLORS = {
-    "emerald": {
-        "text": "text-emerald-400",
-        "background": "bg-emerald-400",
-        "hex": "#10b981",
-    },
-    "purple": {
-        "text": "text-purple-400",
-        "background": "bg-purple-400",
-        "hex": "#a855f7",
-    },
-    "indigo": {
-        "text": "text-indigo-400",
-        "background": "bg-indigo-400",
-        "hex": "#6366f1",
+    "red": {
+        "text": "text-red-400",
+        "background": "bg-red-400",
+        "hex": "#ef4444",
     },
     "orange": {
         "text": "text-orange-400",
         "background": "bg-orange-400",
         "hex": "#f97316",
     },
-    "blue": {
-        "text": "text-blue-400",
-        "background": "bg-blue-400",
-        "hex": "#3b82f6",
-    },
-    "red": {
-        "text": "text-red-400",
-        "background": "bg-red-400",
-        "hex": "#ef4444",
-    },
-    "yellow": {
-        "text": "text-yellow-400",
-        "background": "bg-yellow-400",
-        "hex": "#eab308",
-    },
-    "fuchsia": {
-        "text": "text-fuchsia-400",
-        "background": "bg-fuchsia-400",
-        "hex": "#d946ef",
-    },
-    "cyan": {
-        "text": "text-cyan-400",
-        "background": "bg-cyan-400",
-        "hex": "#06b6d4",
+    "amber": {
+        "text": "text-amber-400",
+        "background": "bg-amber-400",
+        "hex": "#f59e0b",
     },
     "lime": {
         "text": "text-lime-400",
         "background": "bg-lime-400",
         "hex": "#84cc16",
     },
+    "green": {
+        "text": "text-green-400",
+        "background": "bg-green-400",
+        "hex": "#22c55e",
+    },
+    "teal": {
+        "text": "text-teal-400",
+        "background": "bg-teal-400",
+        "hex": "#14b8a6",
+    },
+    "cyan": {
+        "text": "text-cyan-400",
+        "background": "bg-cyan-400",
+        "hex": "#06b6d4",
+    },
     "sky": {
         "text": "text-sky-400",
         "background": "bg-sky-400",
         "hex": "#87ceeb",
+    },
+    "blue": {
+        "text": "text-blue-400",
+        "background": "bg-blue-400",
+        "hex": "#3b82f6",
+    },
+    "indigo": {
+        "text": "text-indigo-400",
+        "background": "bg-indigo-400",
+        "hex": "#6366f1",
+    },
+    "violet": {
+        "text": "text-violet-400",
+        "background": "bg-violet-400",
+        "hex": "#8b5cf6",
+    },
+    "purple": {
+        "text": "text-purple-400",
+        "background": "bg-purple-400",
+        "hex": "#a855f7",
+    },
+    "pink": {
+        "text": "text-pink-400",
+        "background": "bg-pink-400",
+        "hex": "#ec4899",
     },
 }
 
@@ -70,8 +80,8 @@ MEDIA_TYPE_CONFIG = {
         "sample_query": "Breaking Bad",
         "unicode_icon": "📺",
         "verb": ("watch", "watched"),
-        "text_color": COLORS["emerald"]["text"],
-        "stats_color": COLORS["emerald"]["hex"],
+        "text_color": COLORS["purple"]["text"],
+        "stats_color": COLORS["purple"]["hex"],
         "svg_icon": """
             <rect width="20" height="15" x="2" y="7" rx="2" ry="2"/>
             <polyline points="17 2 12 7 7 2"/>""",
@@ -95,8 +105,8 @@ MEDIA_TYPE_CONFIG = {
         "default_source": Sources.TMDB,
         "unicode_icon": "📺",
         "verb": ("watch", "watched"),
-        "text_color": COLORS["indigo"]["text"],
-        "stats_color": COLORS["indigo"]["hex"],
+        "text_color": COLORS["purple"]["text"],
+        "stats_color": COLORS["purple"]["hex"],
         "svg_icon": """<polygon points="6 3 20 12 6 21 6 3"/>""",
     },
     MediaTypes.MOVIE.value: {
@@ -105,8 +115,8 @@ MEDIA_TYPE_CONFIG = {
         "sample_query": "The Shawshank Redemption",
         "unicode_icon": "🎬",
         "verb": ("watch", "watched"),
-        "text_color": COLORS["orange"]["text"],
-        "stats_color": COLORS["orange"]["hex"],
+        "text_color": COLORS["blue"]["text"],
+        "stats_color": COLORS["blue"]["hex"],
         "svg_icon": """
             <rect width="18" height="18" x="3" y="3" rx="2"/>
             <path d="M7 3v18"/>
@@ -124,8 +134,8 @@ MEDIA_TYPE_CONFIG = {
         "sample_query": "Perfect Blue",
         "unicode_icon": "🎭",
         "verb": ("watch", "watched"),
-        "text_color": COLORS["blue"]["text"],
-        "stats_color": COLORS["blue"]["hex"],
+        "text_color": COLORS["violet"]["text"],
+        "stats_color": COLORS["violet"]["hex"],
         "svg_icon": """
             <circle cx="12" cy="12" r="10"/>
             <polygon points="10 8 16 12 10 16 10 8"/>""",
@@ -138,8 +148,8 @@ MEDIA_TYPE_CONFIG = {
         "sample_query": "Berserk",
         "unicode_icon": "📚",
         "verb": ("read", "read"),
-        "text_color": COLORS["red"]["text"],
-        "stats_color": COLORS["red"]["hex"],
+        "text_color": COLORS["pink"]["text"],
+        "stats_color": COLORS["pink"]["hex"],
         "svg_icon": """
             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2
             0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
@@ -156,8 +166,8 @@ MEDIA_TYPE_CONFIG = {
         "sample_query": "Half-Life",
         "unicode_icon": "🎮",
         "verb": ("play", "played"),
-        "text_color": COLORS["yellow"]["text"],
-        "stats_color": COLORS["yellow"]["hex"],
+        "text_color": COLORS["amber"]["text"],
+        "stats_color": COLORS["amber"]["hex"],
         "svg_icon": """
             <line x1="6" x2="10" y1="11" y2="11"/>
             <line x1="8" x2="8" y1="9" y2="13"/>
@@ -178,8 +188,8 @@ MEDIA_TYPE_CONFIG = {
         "sample_query": "The Great Gatsby",
         "unicode_icon": "📖",
         "verb": ("read", "read"),
-        "text_color": COLORS["fuchsia"]["text"],
-        "stats_color": COLORS["fuchsia"]["hex"],
+        "text_color": COLORS["teal"]["text"],
+        "stats_color": COLORS["teal"]["hex"],
         "svg_icon": """
             <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5
             2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>""",
@@ -223,9 +233,9 @@ MEDIA_TYPE_CONFIG = {
 # --- Status Configuration ---
 STATUS_CONFIG = {
     Status.COMPLETED.value: {
-        "text_color": COLORS["emerald"]["text"],
-        "stats_color": COLORS["emerald"]["hex"],
-        "background_color": COLORS["emerald"]["background"],
+        "text_color": COLORS["green"]["text"],
+        "stats_color": COLORS["green"]["hex"],
+        "background_color": COLORS["green"]["background"],
     },
     Status.IN_PROGRESS.value: {
         "text_color": COLORS["indigo"]["text"],
