@@ -98,8 +98,12 @@
       {% endif %}
 
       {# Genres #}
-      <div class="flex flex-wrap gap-2 mb-4">
-        {% for genre in media.genres %}<span class="yt-chip-violet px-3 py-1 text-sm">{{ genre }}</span>{% endfor %}
+      <div class="flex flex-wrap items-center gap-y-2 mb-4 text-sm">
+        {% for genre in media.genres %}
+          <span class="flex items-center after:content-['|'] after:mx-2 after:text-gray-400 last:after:content-none">
+            {{ genre }}
+          </span>
+        {% endfor %}
       </div>
 
       {# Description #}
@@ -412,7 +416,7 @@
         {# Sync metadata #}
         <button type="button"
                 title="Sync metadata with provider"
-                class="yt-button-primary flex items-center disabled:opacity-75"
+                class="yt-button flex items-center disabled:opacity-75"
                 hx-post="{% media_view_url 'sync_metadata' media %}"
                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                 hx-vals='{"next": "{{ request.get_full_path|urlencode }}"}'
