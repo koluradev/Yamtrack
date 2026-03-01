@@ -58,7 +58,8 @@
                   type="button">
             {% include "app/icons/funnel.svg" with classes="w-4 h-4" %}
             <span x-text="statusLabels[status] || status"></span>
-            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
+            <div class="transition-transform duration-200 ml-2"
+                 :class="{'rotate-180': open}">{% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}</div>
           </button>
 
           <div class="yt-dropdown-popup absolute w-48"
@@ -91,7 +92,8 @@
                   type="button">
             {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4" %}
             <span x-text="sortLabels[sort] || sort"></span>
-            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
+            <div class="transition-transform duration-200 ml-2"
+                 :class="{'rotate-180': open}">{% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}</div>
           </button>
 
           <div class="yt-dropdown-popup absolute w-48"
