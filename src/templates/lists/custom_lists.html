@@ -11,7 +11,7 @@
 
 {% block content %}
   <div x-data="{ showModal: false }">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
       <div>
         <h1 class="yt-page-title">Lists</h1>
         <p class="yt-page-subtitle">Organize and share your media lists</p>
@@ -56,7 +56,8 @@
                 type="button">
           {% include "app/icons/arrows-up-down.svg" with classes="w-4 h-4" %}
           <span x-text="sort === 'last_item_added' ? 'Last Item Added' : (sort === 'name' ? 'Name' : (sort === 'newest_first' ? 'Newest First' : 'Items Count'))"></span>
-          {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 ml-2" %}
+          <div class="transition-transform duration-200 ml-2"
+               :class="{'rotate-180': open}">{% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}</div>
         </button>
 
         <div class="yt-dropdown-popup absolute w-48"
