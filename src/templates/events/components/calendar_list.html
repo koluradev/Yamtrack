@@ -3,18 +3,18 @@
 
 <div class="space-y-6">
   {% for day, releases in release_dict.items %}
-    <div class="border border-gray-700 bg-gray-800 rounded-lg overflow-hidden">
-      <div class="px-4 py-3 font-medium flex items-center justify-between text-gray-200">
+    <div class="yt-container-light overflow-hidden">
+      <div class="px-4 py-3 font-medium flex items-center justify-between text-gray-200 bg-gray-800">
         <span>{% day_of_week day month year %}, {{ month_name }} {{ day }}</span>
         {% if day == today.day and month == today.month and year == today.year %}
           <span class="text-sm bg-white text-indigo-600 px-2 py-0.5 rounded-full">Today</span>
         {% endif %}
       </div>
 
-      <div class="p-4 space-y-3 bg-gray-900">
+      <div class="p-4 space-y-2">
         {% for release in releases %}
           <a href="{{ release.item|media_url }}" class="block">
-            <div class="flex items-center gap-3 p-2 rounded-sm transition-colors duration-200 cursor-pointer border border-transparent hover:border-gray-500 hover:bg-gray-600/90">
+            <div class="flex items-center gap-3 p-2 rounded-md transition-colors duration-200 cursor-pointer border border-transparent hover:border-gray-600 hover:bg-gray-700">
               <img alt="{{ release }}"
                    class="w-10 h-10 object-cover rounded-md shrink-0"
                    src="{{ release.item.image }}">

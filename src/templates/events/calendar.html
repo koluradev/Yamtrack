@@ -19,7 +19,7 @@
              href="{% url 'calendar' %}?month={{ prev_month }}&year={{ prev_year }}&view={{ view_type }}">
             {% include "app/icons/chevron-left.svg" with classes="w-5 h-5" %}
           </a>
-          <h2 class="px-4 py-1.5 border-t border-b bg-gray-700 border-gray-500 text-lg font-semibold min-w-40 text-center">
+          <h2 class="px-4 py-1.5 border-t border-b bg-gray-600/80 border-gray-500 text-lg font-semibold min-w-40 text-center">
             {{ month_name }} {{ year }}
           </h2>
           <a class="yt-button !py-2.5 !rounded-l-none !px-2 !border-l-0"
