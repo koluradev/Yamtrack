@@ -33,7 +33,7 @@
 
 /** Custom Styles **/
 .yt-button {
-  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-gray-700 border-gray-500 hover:bg-gray-600 active:bg-gray-700 active:border-gray-700;
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-gray-600/80 border-gray-500 hover:bg-gray-600/100 active:bg-gray-700 active:border-gray-700;
 }
 .yt-button-primary {
  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-purple-600/80 border-purple-500 hover:bg-purple-600/100 active:bg-purple-700 active:border-purple-700;
@@ -42,10 +42,10 @@
   @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-indigo-600/80 border-indigo-500 hover:bg-indigo-600/100 active:bg-indigo-700 active:border-indigo-700;
 }
 .yt-button-list {
-  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-teal-600/80 border-teal-500 hover:bg-teal-600/100 active:bg-teal-700 active:border-teal-700;
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-emerald-600/80 border-emerald-500 hover:bg-emerald-600/100 active:bg-emerald-700 active:border-emerald-700;
 }
 .yt-button-history {
-  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-amber-600/80 border-amber-500 hover:bg-amber-600/100 active:bg-amber-700 active:border-amber-700;
+  @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-fuchsia-600/80 border-fuchsia-500 hover:bg-fuchsia-600/100 active:bg-fuchsia-700 active:border-fuchsia-700;
 }
 .yt-button-delete {
   @apply px-4 py-2 rounded-md transition duration-200 cursor-pointer text-white border bg-red-600/80 border-red-500 hover:bg-red-600/100 active:bg-red-700 active:border-red-700;
@@ -65,7 +65,7 @@
   @apply mt-2 px-1 pt-1 rounded-md shadow-lg border border-gray-700 bg-gray-800/80 backdrop-blur overflow-hidden z-10;
 }
 .yt-dropdown-item {
-  @apply flex items-center px-4 py-2 mb-1 rounded-sm transition-colors duration-200 cursor-pointer border border-transparent hover:border-gray-500 hover:bg-gray-600/90;
+  @apply flex items-center px-4 py-2 mb-1 rounded-sm transition-colors duration-200 cursor-pointer border border-transparent hover:border-gray-600 hover:bg-gray-700/90;
 }
 .yt-dropdown-item-current {
   @apply border-purple-500 bg-purple-600/90 hover:border-purple-500 hover:bg-purple-600/90;
@@ -96,6 +96,7 @@
 /* https://tailwindcss.com/docs/upgrade-guide#hover-styles-on-mobile */
 @custom-variant hover-tap (&:hover);
 @custom-variant parent-hover-tap (.hover-tap:hover &);
+@custom-variant scrolled (.scrolled &);
 
 /** Toast **/
 .toast-error {
