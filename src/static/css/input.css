@@ -55,7 +55,7 @@
 }
 
 .yt-input {
-  @apply px-4 py-2 rounded-md transition duration-200 text-white border bg-gray-700 border-gray-500 hover:bg-gray-600 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600;
+  @apply px-4 py-2 rounded-md transition duration-200 text-white border bg-gray-700 border-gray-500 hover:bg-gray-600 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500;
 }
 
 .yt-dropdown {
@@ -68,7 +68,7 @@
   @apply flex items-center px-4 py-2 mb-1 rounded-sm transition-colors duration-200 cursor-pointer border border-transparent hover:border-gray-600 hover:bg-gray-700/90;
 }
 .yt-dropdown-item-current {
-  @apply border-purple-500 bg-purple-600/90 hover:border-purple-500 hover:bg-purple-600/90;
+  @apply border-purple-500 bg-purple-600/90 hover:!border-purple-500 hover:!bg-purple-600/90;
 }
 
 .yt-container-light {

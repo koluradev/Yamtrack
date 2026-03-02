@@ -9,9 +9,9 @@
 
 {% block settings_content %}
   <div class="space-y-6">
-    <div class="bg-[#2a2f35] rounded-lg p-6">
+    <div class="yt-container-light p-6">
       <div class="flex items-center mb-5">
-        {% include "app/icons/person.svg" with classes="w-6 h-6 text-indigo-400 mr-3" %}
+        {% include "app/icons/person.svg" with classes="w-6 h-6 text-purple-400 mr-3" %}
         <h2 class="text-xl font-semibold">Profile Information</h2>
       </div>
 
@@ -21,23 +21,22 @@
         </div>
       {% endif %}
 
-      <form method="post" class="space-y-4">
+      <form method="post" class="space-y-5">
         {% csrf_token %}
-        <div>
+        <div class="grid grid-cols-3 gap-4">
           <label for="{{ user_form.username.id_for_label }}"
-                 class="block text-sm font-medium mb-2 text-gray-300">Username</label>
+                 class="block font-medium text-gray-400 mt-2 mb-1">Username</label>
           <input id="{{ user_form.username.id_for_label }}"
                  name="{{ user_form.username.html_name }}"
-                 class="w-full py-2 px-3 bg-[#39404b] rounded-md text-white text-sm border {% if user_form.username.errors %}border-red-500{% else %}border-gray-600{% endif %} focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                 class="yt-input w-full col-span-2 {% if user_form.username.errors %}!border-red-500{% endif %}"
                  type="text"
                  value="{{ user_form.username.value|default:user.username }}">
           {% if user_form.username.errors %}
             <p class="mt-1 text-sm text-red-400">{{ user_form.username.errors.0 }}</p>
           {% endif %}
         </div>
-        <div class="pt-2">
-          <button type="submit"
-                  class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm cursor-pointer">
+        <div class="mt-8 border-t border-gray-700 pt-5 flex justify-end">
+          <button type="submit" class="yt-button-primary flex items-center">
             {% include "app/icons/save.svg" with classes="w-4 h-4 mr-2" %}
             Save Changes
           </button>
@@ -45,9 +44,9 @@
       </form>
     </div>
 
-    <div class="bg-[#2a2f35] rounded-lg p-6">
+    <div class="yt-container-light p-6">
       <div class="flex items-center mb-5">
-        {% include "app/icons/padlock.svg" with classes="w-6 h-6 text-indigo-400 mr-3" %}
+        {% include "app/icons/padlock.svg" with classes="w-6 h-6 text-purple-400 mr-3" %}
         <h2 class="text-xl font-semibold">Change Password</h2>
       </div>
 
@@ -58,16 +57,16 @@
       {% endif %}
 
       <form method="post"
-            class="space-y-4"
+            class="space-y-5"
             x-data="{ showCurrentPassword: false, showNewPassword: false, showConfirmPassword: false }">
         {% csrf_token %}
-        <div class="relative">
+        <div class="relative grid grid-cols-3 gap-4">
           <label for="{{ password_form.old_password.id_for_label }}"
-                 class="block text-sm font-medium mb-2 text-gray-300">Current Password</label>
-          <div class="relative">
+                 class="block font-medium mb-2 text-gray-400 mt-2 mb-1">Current Password</label>
+          <div class="relative col-span-2">
             <input id="{{ password_form.old_password.id_for_label }}"
                    name="{{ password_form.old_password.html_name }}"
-                   class="w-full py-2 px-3 pr-10 bg-[#39404b] rounded-md text-white text-sm border {% if password_form.old_password.errors %}border-red-500{% else %}border-gray-600{% endif %} focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                   class="yt-input w-full !pr-10 {% if password_form.old_password.errors %}!border-red-500{% endif %}"
                    :type="showCurrentPassword ? 'text' : 'password'"
                    value="">
             <button type="button"
@@ -85,13 +84,13 @@
           {% endif %}
         </div>
 
-        <div class="relative">
+        <div class="relative grid grid-cols-3 gap-4">
           <label for="{{ password_form.new_password1.id_for_label }}"
-                 class="block text-sm font-medium mb-2 text-gray-300">New Password</label>
-          <div class="relative">
+                 class="block font-medium mb-2 text-gray-400 mt-2 mb-1">New Password</label>
+          <div class="relative col-span-2">
             <input id="{{ password_form.new_password1.id_for_label }}"
                    name="{{ password_form.new_password1.html_name }}"
-                   class="w-full py-2 px-3 pr-10 bg-[#39404b] rounded-md text-white text-sm border {% if password_form.new_password1.errors %}border-red-500{% else %}border-gray-600{% endif %} focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                   class="yt-input w-full !pr-10 {% if password_form.old_password.errors %}!border-red-500{% endif %}"
                    :type="showNewPassword ? 'text' : 'password'"
                    value="">
             <button type="button"
@@ -109,13 +108,13 @@
           {% endif %}
         </div>
 
-        <div class="relative">
+        <div class="relative grid grid-cols-3 gap-4">
           <label for="{{ password_form.new_password2.id_for_label }}"
-                 class="block text-sm font-medium mb-2 text-gray-300">Confirm New Password</label>
-          <div class="relative">
+                 class="block font-medium mb-2 text-gray-400 mt-2 mb-1">Confirm New Password</label>
+          <div class="relative col-span-2">
             <input id="{{ password_form.new_password2.id_for_label }}"
                    name="{{ password_form.new_password2.html_name }}"
-                   class="w-full py-2 px-3 pr-10 bg-[#39404b] rounded-md text-white text-sm border {% if password_form.new_password2.errors %}border-red-500{% else %}border-gray-600{% endif %} focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                   class="yt-input w-full !pr-10 {% if password_form.old_password.errors %}!border-red-500{% endif %}"
                    :type="showConfirmPassword ? 'text' : 'password'"
                    value="">
             <button type="button"
@@ -133,9 +132,8 @@
           {% endif %}
         </div>
 
-        <div class="pt-2">
-          <button type="submit"
-                  class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm cursor-pointer">
+        <div class="mt-8 border-t border-gray-700 pt-5 flex justify-end">
+          <button type="submit" class="yt-button-primary flex items-center">
             {% include "app/icons/save.svg" with classes="w-4 h-4 mr-2" %}
             Update Password
           </button>
