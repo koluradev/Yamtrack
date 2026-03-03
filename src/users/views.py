@@ -235,6 +235,7 @@ def preferences(request):
         return redirect("preferences")
 
     # Process form submission
+    request.user.full_width_layout = "full_width_layout" in request.POST
     request.user.clickable_media_cards = "clickable_media_cards" in request.POST
     request.user.quick_watch_date = request.POST.get(
         "quick_watch_date",

@@ -241,7 +241,7 @@
           </div>
 
           <main class="flex-1 relative bg-gray-900">
-            <div class="container mx-auto px-8 py-12">
+            <div class="{% if user.full_width_layout %}w-full px-4{% else %}container px-8 mx-auto{% endif %} py-12">
               {% block content %}
               {% endblock content %}
             </div>

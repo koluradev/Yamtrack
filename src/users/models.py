@@ -295,6 +295,10 @@ class User(AbstractUser):
         help_text="Hide hover overlay on touch devices",
     )
 
+    full_width_layout = models.BooleanField(
+        default=False, help_text="Stretch content across the entire screen"
+    )
+
     # Tracking settings
     quick_watch_date = models.CharField(
         max_length=20,

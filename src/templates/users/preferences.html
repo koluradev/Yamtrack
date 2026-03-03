@@ -8,145 +8,164 @@
 
 {% block settings_content %}
   <div class="space-y-6">
-  <div class="yt-container-light p-6">
-    <div class="flex items-center mb-4">
+    <div class="yt-container-light p-6">
+      <div class="flex items-center mb-4">
         {% include "app/icons/eye.svg" with classes="w-6 h-6 text-purple-400 mr-3" %}
         <h2 class="text-xl font-semibold">Visual Appearance</h2>
-    </div>
+      </div>
       <p class="text-gray-400 mb-5 text-sm">Customize the look of the application.</p>
-    <form method="post" class="space-y-5">
-      {% csrf_token %}
+      <form method="post" class="space-y-5">
+        {% csrf_token %}
 
         <div class="grid gap-3 grid-cols-1">
-          
-      {# Media Card Overlay #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/image.svg" with classes="w-5 h-5 mr-2" %}
-              <span class="font-medium">Hide Hover Overlay on Touch Devices</span>
-            </div>
-            <p class="text-sm text-gray-400 ml-7">
-              Hide the media card hover overlay with action buttons on touch devices for a cleaner mobile experience.
-              On desktop, the overlay will still appear when you hover your mouse over media cards.
-            </p>
-          </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input class="sr-only peer"
-                   type="checkbox"
-                   name="clickable_media_cards"
-                   {% if user.clickable_media_cards %}checked{% endif %}>
-            <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
-            </div>
-          </label>
-      </div>
 
-      {# Progress bar #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/minus.svg" with classes="w-5 h-5 mr-2" %}
+          {# Layout Width #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/stretch.svg" with classes="w-5 h-5 mr-2" %}
+                <span class="font-medium">Use Full Width Layout</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">Stretch content across the entire screen instead of using a centered layout.</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input class="sr-only peer"
+                     type="checkbox"
+                     name="full_width_layout"
+                     {% if user.full_width_layout %}checked{% endif %}>
+              <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+              </div>
+            </label>
+          </div>
+
+          {# Media Card Overlay #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/image.svg" with classes="w-5 h-5 mr-2" %}
+                <span class="font-medium">Hide Hover Overlay on Touch Devices</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">
+                Hide the media card hover overlay with action buttons on touch devices for a cleaner mobile experience.
+                On desktop, the overlay will still appear when you hover your mouse over media cards.
+              </p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input class="sr-only peer"
+                     type="checkbox"
+                     name="clickable_media_cards"
+                     {% if user.clickable_media_cards %}checked{% endif %}>
+              <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+              </div>
+            </label>
+          </div>
+
+          {# Progress bar #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/minus.svg" with classes="w-5 h-5 mr-2" %}
                 <span class="font-medium">Show Progress Bar on Media Items</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">
+                Display a progress bar on media items. Items which don't have max progress will be using a dotted line.
+              </p>
             </div>
-            <p class="text-sm text-gray-400 ml-7">
-              Display a progress bar on media items. Items which don't have max progress will be using a dotted line.
-            </p>
+            <label class="relative inline-flex items-center cursor-pointer ml-4">
+              <input class="sr-only peer"
+                     type="checkbox"
+                     name="progress_bar"
+                     {% if user.progress_bar %}checked{% endif %}>
+              <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+              </div>
+            </label>
           </div>
-          <label class="relative inline-flex items-center cursor-pointer ml-4">
-            <input class="sr-only peer"
-                   type="checkbox"
-                   name="progress_bar"
-                   {% if user.progress_bar %}checked{% endif %}>
-            <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
-            </div>
-          </label>
-      </div>
 
-      {# Hide Completed Recommendations #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/circle-check.svg" with classes="w-5 h-5 mr-2" %}
+          {# Hide Completed Recommendations #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/circle-check.svg" with classes="w-5 h-5 mr-2" %}
                 <span class="font-medium">Hide Completed Media in Recommendations</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">
+                Hide media you've already completed from the recommendations section on detail pages.
+              </p>
             </div>
-            <p class="text-sm text-gray-400 ml-7">
-              Hide media you've already completed from the recommendations section on detail pages.
-            </p>
+            <label class="relative inline-flex items-center cursor-pointer ml-4">
+              <input class="sr-only peer"
+                     type="checkbox"
+                     name="hide_completed_recommendations"
+                     {% if user.hide_completed_recommendations %}checked{% endif %}>
+              <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+              </div>
+            </label>
           </div>
-          <label class="relative inline-flex items-center cursor-pointer ml-4">
-            <input class="sr-only peer"
-                   type="checkbox"
-                   name="hide_completed_recommendations"
-                   {% if user.hide_completed_recommendations %}checked{% endif %}>
-            <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
-            </div>
-          </label>
-      </div>
 
-      {# Hide Zero Ratings #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/star.svg" with classes="w-5 h-5 mr-2" %}
+          {# Hide Zero Ratings #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/star.svg" with classes="w-5 h-5 mr-2" %}
                 <span class="font-medium">Hide Zero Ratings</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">Hide the rating badge from media cards when the rating is zero.</p>
             </div>
-            <p class="text-sm text-gray-400 ml-7">Hide the rating badge from media cards when the rating is zero.</p>
+            <label class="relative inline-flex items-center cursor-pointer ml-4">
+              <input class="sr-only peer"
+                     type="checkbox"
+                     name="hide_zero_rating"
+                     {% if user.hide_zero_rating %}checked{% endif %}>
+              <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+              </div>
+            </label>
           </div>
-          <label class="relative inline-flex items-center cursor-pointer ml-4">
-            <input class="sr-only peer"
-                   type="checkbox"
-                   name="hide_zero_rating"
-                   {% if user.hide_zero_rating %}checked{% endif %}>
-            <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
-            </div>
-          </label>
-      </div>
 
-      {# Date Format #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/calendar.svg" with classes="w-5 h-5 mr-2" %}
-              <span class="font-medium">Date Format</span>
+          {# Date Format #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/calendar.svg" with classes="w-5 h-5 mr-2" %}
+                <span class="font-medium">Date Format</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">Choose how dates are displayed throughout the application.</p>
             </div>
-            <p class="text-sm text-gray-400 ml-7">Choose how dates are displayed throughout the application.</p>
+            <select name="date_format" class="yt-input">
+              {% for choice in date_format_choices %}
+                <option value="{{ choice.0 }}"
+                        {% if user.date_format == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+              {% endfor %}
+            </select>
           </div>
-          <select name="date_format" class="yt-input">
-            {% for choice in date_format_choices %}
-              <option value="{{ choice.0 }}"
-                      {% if user.date_format == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
-            {% endfor %}
-          </select>
-      </div>
 
-      {# Time Format #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/clock.svg" with classes="w-5 h-5 mr-2" %}
-              <span class="font-medium">Time Format</span>
+          {# Time Format #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/clock.svg" with classes="w-5 h-5 mr-2" %}
+                <span class="font-medium">Time Format</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">Choose between 12-hour or 24-hour clock display.</p>
             </div>
-            <p class="text-sm text-gray-400 ml-7">Choose between 12-hour or 24-hour clock display.</p>
+            <select name="time_format" class="yt-input">
+              {% for choice in time_format_choices %}
+                <option value="{{ choice.0 }}"
+                        {% if user.time_format == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+              {% endfor %}
+            </select>
           </div>
-          <select name="time_format" class="yt-input">
-            {% for choice in time_format_choices %}
-              <option value="{{ choice.0 }}"
-                      {% if user.time_format == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
-            {% endfor %}
-          </select>
         </div>
-      </div>
 
         <div class="border-t border-gray-700"></div>
 
         <div class="flex items-center mb-4">
-        {% include "app/icons/horizontal-sliders.svg" with classes="w-6 h-6 text-purple-400 mr-3" %}
-        <h2 class="text-xl font-semibold">Behavior</h2>
-      </div>
-      <p class="text-gray-400 mb-5 text-sm">Customize the behavior of the application.</p>
+          {% include "app/icons/horizontal-sliders.svg" with classes="w-6 h-6 text-purple-400 mr-3" %}
+          <h2 class="text-xl font-semibold">Behavior</h2>
+        </div>
+        <p class="text-gray-400 mb-5 text-sm">Customize the behavior of the application.</p>
 
-      <div class="grid gap-3 grid-cols-1">
-        {# Quick Watch Date #}
+        <div class="grid gap-3 grid-cols-1">
+          {# Quick Watch Date #}
           <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
@@ -163,29 +182,29 @@
                         {% if user.quick_watch_date == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
               {% endfor %}
             </select>
-        </div>
-
-      {# Watch Provider Region #}
-        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-          <div class="flex-1">
-            <div class="flex items-center text-gray-200 mb-1">
-              {% include "app/icons/globe.svg" with classes="w-5 h-5 mr-2" %}
-                <span class="font-medium">Watch Provider Region</span>
-            </div>
-            <p class="text-sm text-gray-400 ml-7">
-              Choose the region to show watch providers for. Setting this to disabled will hide the box from the media page.
-            </p>
           </div>
-          <select name="watch_provider_region" class="yt-input">
-            {% for choice in watch_provider_choices %}
-              <option value="{{ choice.0 }}"
-                      {% if user.watch_provider_region == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
 
-      <div class="border-t border-gray-700"></div>
+          {# Watch Provider Region #}
+          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+            <div class="flex-1">
+              <div class="flex items-center text-gray-200 mb-1">
+                {% include "app/icons/globe.svg" with classes="w-5 h-5 mr-2" %}
+                <span class="font-medium">Watch Provider Region</span>
+              </div>
+              <p class="text-sm text-gray-400 ml-7">
+                Choose the region to show watch providers for. Setting this to disabled will hide the box from the media page.
+              </p>
+            </div>
+            <select name="watch_provider_region" class="yt-input">
+              {% for choice in watch_provider_choices %}
+                <option value="{{ choice.0 }}"
+                        {% if user.watch_provider_region == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700"></div>
 
         <div class="flex items-center mb-4">
           {% include "app/icons/four-square.svg" with classes="w-5 h-5 text-purple-400 mr-2" %}
@@ -195,37 +214,37 @@
           Control which media types are visible throughout the app (sidebar, search, calendar, notifications).
         </p>
 
-      <div class="mb-4">
+        <div class="mb-4">
           <div class="grid gap-4 md:grid-cols-3">
-          {% for media_type in media_types %}
-            <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
-              <div class="flex items-center text-gray-400">
-                {% icon media_type %}
-                <span class="text-white ml-2">{{ media_type|media_type_readable_plural }}</span>
-              </div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                {% with enabled_field=media_type|add:"_enabled" %}
-                  <input class="sr-only peer"
-                         type="checkbox"
-                         name="media_types_checkboxes"
-                         value="{{ media_type }}"
-                         {% if user|get_attr:enabled_field %}checked{% endif %}>
-                {% endwith %}
-                <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+            {% for media_type in media_types %}
+              <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+                <div class="flex items-center text-gray-400">
+                  {% icon media_type %}
+                  <span class="text-white ml-2">{{ media_type|media_type_readable_plural }}</span>
                 </div>
-              </label>
-            </div>
-          {% endfor %}
+                <label class="relative inline-flex items-center cursor-pointer">
+                  {% with enabled_field=media_type|add:"_enabled" %}
+                    <input class="sr-only peer"
+                           type="checkbox"
+                           name="media_types_checkboxes"
+                           value="{{ media_type }}"
+                           {% if user|get_attr:enabled_field %}checked{% endif %}>
+                  {% endwith %}
+                  <div class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-px after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4.5 after:w-4.5 after:transition-all peer-checked:bg-purple-500">
+                  </div>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
         </div>
-      </div>
 
-      <div class="mt-8 border-t border-gray-700 pt-5 flex justify-end">
-        <button type="submit" class="yt-button-primary flex items-center">
-          {% include "app/icons/save.svg" with classes="w-4 h-4 mr-2" %}
-          Save Preferences
-        </button>
-      </div>
-    </form>
+        <div class="mt-8 border-t border-gray-700 pt-5 flex justify-end">
+          <button type="submit" class="yt-button-primary flex items-center">
+            {% include "app/icons/save.svg" with classes="w-4 h-4 mr-2" %}
+            Save Preferences
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 {% endblock settings_content %}
