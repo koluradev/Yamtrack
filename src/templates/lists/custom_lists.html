@@ -11,7 +11,7 @@
 
 {% block content %}
   <div x-data="{ showModal: false }">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
       <div>
         <h1 class="yt-page-title">Lists</h1>
         <p class="yt-page-subtitle">Organize and share your media lists</p>
@@ -50,7 +50,8 @@
         </div>
       </div>
 
-      <div class="relative" x-data="{ open: false }">
+      <!-- Sort by - Desktop Custom Dropdown -->
+      <div class="relative hidden md:block" x-data="{ open: false }">
         <button class="yt-dropdown flex items-center"
                 @click="open = !open"
                 type="button">
@@ -80,6 +81,24 @@
                     @click="sort = '{{ value }}'; open = false"
                     type="button">{{ label }}</button>
           {% endfor %}
+        </div>
+      </div>
+
+      <!-- Sort by - Mobile Native Select -->
+      <div class="relative md:hidden" x-data="{ open: false }">
+        <select class="yt-select w-full !pr-7"
+                x-model="sort"
+                @click="open = !open"
+                @blur="open = false"
+                hx-get="{% url 'lists' %}"
+                {% if custom_lists %} hx-target="#lists-grid" {% else %} hx-target="this" hx-swap="none" {% endif %}
+                hx-include="#filter-form"
+                hx-indicator="#loading-indicator">
+          {% for value, label in sort_choices %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+        </select>
+        <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200"
+             :class="{'rotate-180': open}">
+          {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 text-gray-300" %}
         </div>
       </div>
     </div>

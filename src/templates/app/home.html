@@ -6,9 +6,10 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
     <h1 class="yt-page-title">In Progress</h1>
-    <div class="relative" x-data="{ open: false }">
+    <!-- Sort by - Desktop Custom Dropdown -->
+    <div class="relative hidden md:block" x-data="{ open: false }">
       <button @click="open = !open"
               @click.outside="open = false"
               class="yt-dropdown flex items-center">
@@ -32,7 +33,25 @@
         {% endfor %}
       </div>
     </div>
+
+    <!-- Sort by - Mobile Native Select -->
+    <div class="relative md:hidden w-full"
+         x-data="{ open: false, sort: '{{ current_sort }}' }">
+      <select class="yt-select w-full !pr-7"
+              x-model="sort"
+              name="sort"
+              @click="open = !open"
+              @blur="open = false"
+              @change="window.location.href = '{% url 'home' %}?sort=' + sort">
+        {% for value, label in sort_choices %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+      </select>
+      <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200"
+           :class="{'rotate-180': open}">
+        {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 text-gray-300" %}
+      </div>
+    </div>
   </div>
+
   <div class="space-y-8">
     {% for media_type, media_list in list_by_type.items %}
       <div>

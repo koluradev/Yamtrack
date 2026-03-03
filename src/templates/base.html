@@ -204,13 +204,13 @@
 
                       <input type="hidden" name="media_type" :value="selectedType.value">
 
-                      {# Media type dropdown #}
-                      <div class="relative" x-data="{ isOpen: false }">
+                      {# Media type dropdown - Desktop #}
+                      <div class="relative hidden md:block" x-data="{ isOpen: false }">
                         <button type="button"
                                 @click="isOpen = !isOpen"
                                 @click.away="isOpen = false"
-                                class="flex items-center justify-between max-w-[110px] sm:max-w-none sm:w-34 px-2 sm:px-4 py-2.5 text-sm text-gray-300 border border-gray-600 hover:border-gray-500 bg-gray-900/80 focus:bg-gray-900/100 rounded-r-full focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-purple-600 transition-colors duration-200 cursor-pointer">
-                          <span class="truncate sm:whitespace-normal" x-text="selectedType.display"></span>
+                                class="flex items-center justify-between w-34 px-4 py-2.5 text-sm text-gray-300 border border-gray-600 hover:border-gray-500 bg-gray-900/80 focus:bg-gray-900/100 rounded-r-full focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-purple-600 transition-colors duration-200 cursor-pointer">
+                          <span class="truncate whitespace-normal" x-text="selectedType.display"></span>
                           <div class="transition-transform duration-200 ml-2"
                                :class="{'rotate-180': isOpen}">
                             {% include "app/icons/chevron-down.svg" with classes="w-4 h-4" %}
@@ -232,6 +232,25 @@
                                 x-text="type.display"></li>
                           </template>
                         </ul>
+                      </div>
+
+                      {# Media type dropdown - Mobile #}
+                      <div class="relative md:hidden" x-data="{ isOpen: false }">
+                        <select class="flex items-center justify-between max-w-[125px] px-2 pr-6 py-2.5 text-sm text-gray-300 border border-gray-600 hover:border-gray-500 bg-gray-900/80 focus:bg-gray-900/100 rounded-r-full focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-purple-600 transition-colors duration-200 cursor-pointer appearance-none truncate"
+                                name="type"
+                                @click="isOpen = !isOpen"
+                                @blur="isOpen = false"
+                                @change="selectedType = mediaTypes.find(t => t.value === $el.value); $el.closest('form').querySelector('input[name=media_type]').value = selectedType.value">
+                          <template x-for="type in mediaTypes" :key="type.value">
+                            <option :value="type.value"
+                                    :selected="selectedType.value === type.value"
+                                    x-text="type.display"></option>
+                          </template>
+                        </select>
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200"
+                             :class="{'rotate-180': isOpen}">
+                          {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 text-gray-300" %}
+                        </div>
                       </div>
                     </div>
                   </form>

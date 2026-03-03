@@ -51,8 +51,9 @@
       </div>
 
       <div class="flex gap-2 flex-wrap">
-        <!-- Filter by Status -->
-        <div class="relative" x-data="{ open: false }">
+
+        <!-- Filter by Status - Desktop Custom Dropdown -->
+        <div class="relative hidden md:block" x-data="{ open: false }">
           <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
@@ -85,8 +86,27 @@
           </div>
         </div>
 
-        <!-- Sort by -->
-        <div class="relative" x-data="{ open: false }">
+        <!-- Filter by Status - Mobile Native Select -->
+        <div class="relative md:hidden w-full" x-data="{ open: false }">
+          <select class="yt-select w-full !pr-7"
+                  x-model="status"
+                  name="status"
+                  @blur="open = false"
+                  @click="open = !open"
+                  hx-get="{% url 'medialist' media_type %}"
+                  {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
+                  hx-include="#filter-form"
+                  hx-indicator="#loading-indicator">
+            {% for value, label in status_choices %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+          </select>
+          <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200"
+               :class="{'rotate-180': open}">
+            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 text-gray-300" %}
+          </div>
+        </div>
+
+        <!-- Sort by - Desktop Custom Dropdown -->
+        <div class="relative hidden md:block" x-data="{ open: false }">
           <button class="yt-dropdown flex items-center"
                   @click="open = !open"
                   type="button">
@@ -116,6 +136,25 @@
                       @click="sort = '{{ value }}'; open = false"
                       type="button">{{ label }}</button>
             {% endfor %}
+          </div>
+        </div>
+
+        <!-- Sort by - Mobile Native Select -->
+        <div class="relative md:hidden w-full" x-data="{ open: false }">
+          <select class="yt-select w-full !pr-7"
+                  x-model="sort"
+                  name="sort"
+                  @blur="open = false"
+                  @click="open = !open"
+                  hx-get="{% url 'medialist' media_type %}"
+                  {% if media_list %} hx-target="{{ layout_class }}" {% else %} hx-target="#empty_list" {% endif %}
+                  hx-include="#filter-form"
+                  hx-indicator="#loading-indicator">
+            {% for value, label in sort_choices %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+          </select>
+          <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200"
+               :class="{'rotate-180': open}">
+            {% include "app/icons/chevron-down.svg" with classes="w-4 h-4 text-gray-300" %}
           </div>
         </div>
 
