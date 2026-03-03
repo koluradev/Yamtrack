@@ -20,7 +20,7 @@
         <div class="grid gap-3 grid-cols-1">
 
           {# Layout Width #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/stretch.svg" with classes="w-5 h-5 mr-2" %}
@@ -28,7 +28,7 @@
               </div>
               <p class="text-sm text-gray-400 ml-7">Stretch content across the entire screen instead of using a centered layout.</p>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label class="relative inline-flex items-center cursor-pointer ml-4 mr-2">
               <input class="sr-only peer"
                      type="checkbox"
                      name="full_width_layout"
@@ -39,7 +39,7 @@
           </div>
 
           {# Media Card Overlay #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/image.svg" with classes="w-5 h-5 mr-2" %}
@@ -50,7 +50,7 @@
                 On desktop, the overlay will still appear when you hover your mouse over media cards.
               </p>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label class="relative inline-flex items-center cursor-pointer ml-4 mr-2">
               <input class="sr-only peer"
                      type="checkbox"
                      name="clickable_media_cards"
@@ -61,7 +61,7 @@
           </div>
 
           {# Progress bar #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/minus.svg" with classes="w-5 h-5 mr-2" %}
@@ -71,7 +71,7 @@
                 Display a progress bar on media items. Items which don't have max progress will be using a dotted line.
               </p>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer ml-4">
+            <label class="relative inline-flex items-center cursor-pointer ml-4 mr-2">
               <input class="sr-only peer"
                      type="checkbox"
                      name="progress_bar"
@@ -82,7 +82,7 @@
           </div>
 
           {# Hide Completed Recommendations #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/circle-check.svg" with classes="w-5 h-5 mr-2" %}
@@ -92,7 +92,7 @@
                 Hide media you've already completed from the recommendations section on detail pages.
               </p>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer ml-4">
+            <label class="relative inline-flex items-center cursor-pointer ml-4 mr-2">
               <input class="sr-only peer"
                      type="checkbox"
                      name="hide_completed_recommendations"
@@ -103,7 +103,7 @@
           </div>
 
           {# Hide Zero Ratings #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/star.svg" with classes="w-5 h-5 mr-2" %}
@@ -111,7 +111,7 @@
               </div>
               <p class="text-sm text-gray-400 ml-7">Hide the rating badge from media cards when the rating is zero.</p>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer ml-4">
+            <label class="relative inline-flex items-center cursor-pointer ml-4 mr-2">
               <input class="sr-only peer"
                      type="checkbox"
                      name="hide_zero_rating"
@@ -122,7 +122,7 @@
           </div>
 
           {# Date Format #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/calendar.svg" with classes="w-5 h-5 mr-2" %}
@@ -139,7 +139,7 @@
           </div>
 
           {# Time Format #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/clock.svg" with classes="w-5 h-5 mr-2" %}
@@ -166,7 +166,7 @@
 
         <div class="grid gap-3 grid-cols-1">
           {# Quick Watch Date #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/clock.svg" with classes="w-5 h-5 mr-2" %}
@@ -185,7 +185,7 @@
           </div>
 
           {# Watch Provider Region #}
-          <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+          <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
             <div class="flex-1">
               <div class="flex items-center text-gray-200 mb-1">
                 {% include "app/icons/globe.svg" with classes="w-5 h-5 mr-2" %}
@@ -217,7 +217,7 @@
         <div class="mb-4">
           <div class="grid gap-4 md:grid-cols-3">
             {% for media_type in media_types %}
-              <div class="flex items-center justify-between p-3 bg-gray-800 rounded-md space-x-8">
+              <div class="flex items-center justify-between px-6 py-4 bg-gray-800 rounded-md">
                 <div class="flex items-center text-gray-400">
                   {% icon media_type %}
                   <span class="text-white ml-2">{{ media_type|media_type_readable_plural }}</span>
