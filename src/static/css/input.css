@@ -28,7 +28,10 @@
 
 
 .media-grid {
-  @apply grid grid-cols-2 xs:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4;
+  @apply grid grid-cols-2 xs:grid-cols-[repeat(auto-fill,minmax(9.375rem,1fr))] gap-4;
+}
+.media-grid-home {
+  @apply grid grid-cols-2 xs:grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4;
 }
 
 /** Custom Styles **/
