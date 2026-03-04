@@ -167,7 +167,7 @@ class TVStatusTests(TestCase):
         self.tv = TV.objects.create(
             item=self.tv_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.season1_item = Item.objects.create(
@@ -199,7 +199,7 @@ class TVStatusTests(TestCase):
             item=self.season2_item,
             user=self.user,
             related_tv=self.tv,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
     @patch("app.models.providers.services.get_media_metadata")
@@ -270,7 +270,7 @@ class TVStatusTests(TestCase):
             2,  # season1 and season3
         )
         self.assertEqual(
-            self.tv.seasons.filter(status=Status.PLANNING.value).count(),
+            self.tv.seasons.filter(status=Status.PLANNED.value).count(),
             1,
         )
 

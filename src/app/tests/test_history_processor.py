@@ -44,7 +44,7 @@ class HistoryProcessorTests(TestCase):
             format_description(
                 "status",
                 None,
-                Status.PLANNING.value,
+                Status.PLANNED.value,
                 MediaTypes.GAME.value,
             ),
             "Added to playing list",
@@ -74,7 +74,7 @@ class HistoryProcessorTests(TestCase):
         self.assertEqual(
             format_description(
                 "status",
-                Status.PLANNING.value,
+                Status.PLANNED.value,
                 Status.IN_PROGRESS.value,
                 MediaTypes.TV.value,
             ),

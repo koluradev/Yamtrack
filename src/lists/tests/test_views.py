@@ -253,7 +253,7 @@ class ListDetailViewTests(TestCase):
         # Create Anime instance
         Anime.objects.create(
             item=self.anime_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             user=self.user,
         )
 
@@ -308,7 +308,7 @@ class ListDetailViewTests(TestCase):
 
         Anime.objects.create(
             item=self.anime_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             user=self.user,
         )
 
@@ -334,7 +334,7 @@ class ListDetailViewTests(TestCase):
         mock_update_preference,
     ):
         """Test the list_detail view with status filter."""
-        mock_update_preference.side_effect = ["date_added", Status.PLANNING.value]
+        mock_update_preference.side_effect = ["date_added", Status.PLANNED.value]
         mock_user_can_view.return_value = True
 
         # Create model instances
@@ -352,23 +352,23 @@ class ListDetailViewTests(TestCase):
 
         Anime.objects.create(
             item=self.anime_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             user=self.user,
         )
 
         # Test the view with status filter
         response = self.client.get(
             reverse("list_detail", args=[self.custom_list.id])
-            + f"?status={Status.PLANNING.value}",
+            + f"?status={Status.PLANNED.value}",
         )
         self.assertEqual(response.status_code, 200)
 
         # Check that filters are applied
         self.assertEqual(
             response.context["current_status"],
-            Status.PLANNING.value,
+            Status.PLANNED.value,
         )
-        # Should only have the PLANNING item of media type ANIME
+        # Should only have the PLANNED item of media type ANIME
         self.assertEqual(len(response.context["items"]), 1)
         self.assertEqual(
             response.context["items"][0].media_type,
@@ -401,7 +401,7 @@ class ListDetailViewTests(TestCase):
 
         Anime.objects.create(
             item=self.anime_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             user=self.user,
         )
 
@@ -440,7 +440,7 @@ class ListDetailViewTests(TestCase):
 
         Anime.objects.create(
             item=self.anime_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             user=self.user,
         )
 
@@ -486,7 +486,7 @@ class ListDetailViewTests(TestCase):
 
         Anime.objects.create(
             item=self.anime_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             user=self.user,
         )
 

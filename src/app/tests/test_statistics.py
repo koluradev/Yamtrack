@@ -168,7 +168,7 @@ class StatisticsDateFilteringTests(TestCase):
         self.movie4 = Movie.objects.create(
             user=self.user,
             item=self.movie4_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             score=None,
             start_date=None,
             end_date=None,
@@ -188,7 +188,7 @@ class StatisticsDateFilteringTests(TestCase):
         self.movie6 = Movie.objects.create(
             user=self.user,
             item=self.movie6_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             score=None,
             start_date=datetime.datetime(2025, 3, 10, 0, 0, tzinfo=datetime.UTC),
             end_date=datetime.datetime(2025, 3, 15, 0, 0, tzinfo=datetime.UTC),
@@ -527,7 +527,7 @@ class StatisticsTests(TestCase):
         self.movie = Movie.objects.create(
             user=self.user,
             item=self.movie_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             score=7.5,
             start_date=datetime.datetime(2025, 2, 1, 0, 0, tzinfo=datetime.UTC),
             end_date=datetime.datetime(2025, 2, 1, 0, 0, tzinfo=datetime.UTC),
@@ -613,7 +613,7 @@ class StatisticsTests(TestCase):
         planning_dataset = next(
             d
             for d in status_distribution["datasets"]
-            if d["label"] == Status.PLANNING.value
+            if d["label"] == Status.PLANNED.value
         )
 
         self.assertEqual(completed_dataset["total"], 1)  # Anime
@@ -639,7 +639,7 @@ class StatisticsTests(TestCase):
                     "total": 1,
                 },
                 {
-                    "label": Status.PLANNING.value,
+                    "label": Status.PLANNED.value,
                     "data": [0, 0, 1],
                     "background_color": "#3b82f6",
                     "total": 1,

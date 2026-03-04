@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("users", "0051_alter_user_date_format"),
+        ("users", "0052_remove_user_tv_status_valid_and_more"),
     ]
 
     operations = [

@@ -106,7 +106,7 @@ class MediaManagerTests(TestCase):
         self.book = Book.objects.create(
             item=self.book_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             score=0,
         )
 
@@ -345,7 +345,7 @@ class MediaManagerTests(TestCase):
             item=season3_item,
             related_tv=self.tv,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
             score=0,
         )
 

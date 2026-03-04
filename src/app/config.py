@@ -70,6 +70,11 @@ COLORS = {
         "background": "bg-pink-400",
         "hex": "#ec4899",
     },
+    "gray": {
+        "text": "text-gray-400",
+        "background": "bg-gray-400",
+        "hex": "#6b7280",
+    },
 }
 
 # --- Central Configuration Dictionary ---
@@ -242,15 +247,20 @@ STATUS_CONFIG = {
         "stats_color": COLORS["indigo"]["hex"],
         "background_color": COLORS["indigo"]["background"],
     },
+    Status.PLANNED.value: {
+        "text_color": COLORS["sky"]["text"],
+        "stats_color": COLORS["sky"]["hex"],
+        "background_color": COLORS["sky"]["background"],
+    },
+    Status.NOT_STARTED.value: {
+        "text_color": COLORS["gray"]["text"],
+        "stats_color": COLORS["gray"]["hex"],
+        "background_color": COLORS["gray"]["background"],
+    },
     Status.PAUSED.value: {
         "text_color": COLORS["orange"]["text"],
         "stats_color": COLORS["orange"]["hex"],
         "background_color": COLORS["orange"]["background"],
-    },
-    Status.PLANNING.value: {
-        "text_color": COLORS["sky"]["text"],
-        "stats_color": COLORS["sky"]["hex"],
-        "background_color": COLORS["sky"]["background"],
     },
     Status.DROPPED.value: {
         "text_color": COLORS["red"]["text"],

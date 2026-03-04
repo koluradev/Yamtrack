@@ -208,11 +208,13 @@ def format_description(field_name, old_value, new_value, media_type=None, user=N
         if field_name == "status":
             verb = config.get_verb(media_type, past_tense=False)
             action = "Marked as"
+            if new_value == Status.NOT_STARTED.value:
+                return f"{action} not started"
             if new_value == Status.IN_PROGRESS.value:
                 return f"{action} currently {verb}ing"
             if new_value == Status.COMPLETED.value:
                 return f"{action} finished {verb}ing"
-            if new_value == Status.PLANNING.value:
+            if new_value == Status.PLANNED.value:
                 return f"Added to {verb}ing list"
             if new_value == Status.DROPPED.value:
                 return f"{action} dropped"
@@ -244,7 +246,19 @@ def format_description(field_name, old_value, new_value, media_type=None, user=N
         # Status transitions
         transitions = {
             (
-                Status.PLANNING.value,
+                Status.NOT_STARTED.value,
+                Status.IN_PROGRESS.value,
+            ): f"Started {verb}ing",
+            (
+                Status.NOT_STARTED.value,
+                Status.PLANNED.value,
+            ): f"Added to {verb}ing list",
+            (
+                Status.NOT_STARTED.value,
+                Status.COMPLETED.value,
+            ): f"Finished {verb}ing",
+            (
+                Status.PLANNED.value,
                 Status.IN_PROGRESS.value,
             ): f"Currently {verb}ing",
             (

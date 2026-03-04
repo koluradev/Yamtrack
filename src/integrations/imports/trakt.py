@@ -566,7 +566,7 @@ class TraktImporter:
                 self._process_generic_entry(
                     entry,
                     "watchlist",
-                    {"status": Status.PLANNING.value},
+                    {"status": Status.PLANNED.value},
                 )
             except Exception as e:
                 msg = f"Error processing watchlist entry: {entry}"

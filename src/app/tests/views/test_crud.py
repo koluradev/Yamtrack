@@ -42,7 +42,7 @@ class CreateMedia(TestCase):
                 "media_id": "1",
                 "source": Sources.MAL.value,
                 "media_type": MediaTypes.ANIME.value,
-                "status": Status.PLANNING.value,
+                "status": Status.PLANNED.value,
                 "progress": 0,
                 "repeats": 0,
             },
@@ -68,7 +68,7 @@ class CreateMedia(TestCase):
                 "media_id": "5895",
                 "source": Sources.TMDB.value,
                 "media_type": MediaTypes.TV.value,
-                "status": Status.PLANNING.value,
+                "status": Status.PLANNED.value,
             },
         )
         self.assertEqual(
@@ -93,7 +93,7 @@ class CreateMedia(TestCase):
                 "source": Sources.TMDB.value,
                 "media_type": MediaTypes.SEASON.value,
                 "season_number": 1,
-                "status": Status.PLANNING.value,
+                "status": Status.PLANNED.value,
             },
         )
         self.assertEqual(

@@ -82,7 +82,7 @@ class ImportKitsu(TestCase):
         """Test getting status from Kitsu."""
         self.assertEqual(self.importer._get_status("completed"), Status.COMPLETED.value)
         self.assertEqual(self.importer._get_status("current"), Status.IN_PROGRESS.value)
-        self.assertEqual(self.importer._get_status("planned"), Status.PLANNING.value)
+        self.assertEqual(self.importer._get_status("planned"), Status.PLANNED.value)
         self.assertEqual(self.importer._get_status("on_hold"), Status.PAUSED.value)
 
     def test_process_entry(self):

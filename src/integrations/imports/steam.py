@@ -243,9 +243,9 @@ class SteamImporter:
         Returns:
             str: Status value from Status choices
         """
-        # Games with no playtime are considered "Planning"
+        # Games with no playtime are considered "Not Started"
         if playtime_forever == 0:
-            return Status.PLANNING.value
+            return Status.NOT_STARTED.value
 
         # Games played in the last 2 weeks are "In Progress"
         if playtime_2weeks > 0:
