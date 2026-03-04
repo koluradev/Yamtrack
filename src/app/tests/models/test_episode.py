@@ -83,7 +83,7 @@ class EpisodeStatusTests(TestCase):
         self.tv = TV.objects.create(
             item=self.tv_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.season_item = Item.objects.create(
@@ -99,7 +99,7 @@ class EpisodeStatusTests(TestCase):
             item=self.season_item,
             user=self.user,
             related_tv=self.tv,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.episode_item = Item.objects.create(
@@ -246,4 +246,4 @@ class EpisodeStatusTests(TestCase):
         )
 
         self.tv.refresh_from_db()
-        self.assertEqual(self.tv.status, Status.PLANNING.value)
+        self.assertEqual(self.tv.status, Status.PLANNED.value)

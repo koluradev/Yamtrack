@@ -110,7 +110,7 @@ class ImportSimkl(TestCase):
         anime_item = Item.objects.get(media_type=MediaTypes.ANIME.value)
         self.assertEqual(anime_item.title, "Cowboy Bebop")
         anime_obj = Anime.objects.get(item=anime_item)
-        self.assertEqual(anime_obj.status, Status.PLANNING.value)
+        self.assertEqual(anime_obj.status, Status.PLANNED.value)
         self.assertEqual(anime_obj.score, 7)
         self.assertEqual(anime_obj.notes, "Great series!")
 
@@ -123,7 +123,7 @@ class ImportSimkl(TestCase):
         )
         self.assertEqual(
             self.importer._get_status("plantowatch"),
-            Status.PLANNING.value,
+            Status.PLANNED.value,
         )
         self.assertEqual(self.importer._get_status("hold"), Status.PAUSED.value)
         self.assertEqual(self.importer._get_status("dropped"), Status.DROPPED.value)

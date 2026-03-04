@@ -220,7 +220,7 @@ class HowLongToBeatImporter:
         status_mapping = {
             "Completed": Status.COMPLETED,
             "Playing": Status.IN_PROGRESS,
-            "Backlog": Status.PLANNING,
+            "Backlog": Status.PLANNED,
             "Replay": Status.IN_PROGRESS,
             "Retired": Status.DROPPED,
         }

@@ -43,7 +43,7 @@ class HelpersTest(TestCase):
         tv = TV.objects.create(
             item=item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         new_season = Season(
@@ -67,7 +67,7 @@ class HelpersTest(TestCase):
         tv = TV.objects.create(
             item=tv_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         season_item = Item.objects.create(
@@ -81,7 +81,7 @@ class HelpersTest(TestCase):
             item=season_item,
             user=self.user,
             related_tv=tv,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         episode_item = Item.objects.create(

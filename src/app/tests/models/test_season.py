@@ -257,7 +257,7 @@ class SeasonStatusTests(TestCase):
         self.tv = TV.objects.create(
             item=self.tv_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.season_item = Item.objects.create(
@@ -273,7 +273,7 @@ class SeasonStatusTests(TestCase):
             item=self.season_item,
             user=self.user,
             related_tv=self.tv,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
     @patch("app.models.providers.services.get_media_metadata")
@@ -382,7 +382,7 @@ class SeasonStatusTests(TestCase):
 
             self.assertIsNotNone(tv)
             self.assertEqual(tv.item.title, "Test Show")
-            self.assertEqual(tv.status, Status.PLANNING.value)
+            self.assertEqual(tv.status, Status.PLANNED.value)
 
 
 class SeasonGetRemainingEpsQuickWatchDateTests(TestCase):
@@ -406,7 +406,7 @@ class SeasonGetRemainingEpsQuickWatchDateTests(TestCase):
         self.season = Season.objects.create(
             item=item_season,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.mock_metadata = {

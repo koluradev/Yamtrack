@@ -65,7 +65,7 @@ class EventModelTests(TestCase):
         self.movie = Movie.objects.create(
             user=self.user,
             item=self.movie_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.anime = Anime.objects.create(
@@ -197,7 +197,7 @@ class EventManagerTests(TestCase):
         self.movie = Movie.objects.create(
             user=self.user,
             item=self.movie_item,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.paused_movie = Movie.objects.create(

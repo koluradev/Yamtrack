@@ -33,7 +33,7 @@ class MediaModel(TestCase):
         self.anime = Anime.objects.create(
             item=item_anime,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
     def test_completed_progress(self):

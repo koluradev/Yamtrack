@@ -54,7 +54,7 @@ class ImportIMDB(TestCase):
         )
 
         game_of_thrones = TV.objects.get(item__title="Game of Thrones")
-        self.assertEqual(game_of_thrones.status, Status.PLANNING.value)
+        self.assertEqual(game_of_thrones.status, Status.PLANNED.value)
 
     def test_extract_imdb_id(self):
         """Test IMDB ID extraction and formatting."""

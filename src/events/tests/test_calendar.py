@@ -55,7 +55,7 @@ class ReloadCalendarTaskTests(TestCase):
         Anime.objects.create(
             item=self.anime_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         # Create movie item
@@ -69,7 +69,7 @@ class ReloadCalendarTaskTests(TestCase):
         Movie.objects.create(
             item=self.movie_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.tv_item = Item.objects.create(
@@ -82,7 +82,7 @@ class ReloadCalendarTaskTests(TestCase):
         tv_object = TV.objects.create(
             item=self.tv_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         # Create season item
@@ -98,7 +98,7 @@ class ReloadCalendarTaskTests(TestCase):
             item=self.season_item,
             related_tv=tv_object,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         # Create manga item
@@ -112,7 +112,7 @@ class ReloadCalendarTaskTests(TestCase):
         Manga.objects.create(
             item=self.manga_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         # Create book item
@@ -126,7 +126,7 @@ class ReloadCalendarTaskTests(TestCase):
         Book.objects.create(
             item=self.book_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
         self.comic_item = Item.objects.create(
@@ -139,7 +139,7 @@ class ReloadCalendarTaskTests(TestCase):
         Comic.objects.create(
             item=self.comic_item,
             user=self.user,
-            status=Status.PLANNING.value,
+            status=Status.PLANNED.value,
         )
 
     @patch("events.calendar.process_tv")

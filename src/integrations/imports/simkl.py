@@ -484,7 +484,7 @@ class SimklImporter:
         status_mapping = {
             "completed": Status.COMPLETED.value,
             "watching": Status.IN_PROGRESS.value,
-            "plantowatch": Status.PLANNING.value,
+            "plantowatch": Status.PLANNED.value,
             "hold": Status.PAUSED.value,
             "dropped": Status.DROPPED.value,
         }

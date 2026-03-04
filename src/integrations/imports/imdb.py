@@ -272,7 +272,7 @@ class IMDBImporter:
         rating = self._parse_rating(row.get("Your Rating", ""))
 
         # Determine status - if user rated it, they completed it
-        status = Status.COMPLETED.value if rating is not None else Status.PLANNING.value
+        status = Status.COMPLETED.value if rating is not None else Status.PLANNED.value
 
         params = {
             "item": item,

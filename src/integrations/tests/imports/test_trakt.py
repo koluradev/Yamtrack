@@ -117,7 +117,7 @@ class ImportTrakt(TestCase):
 
         self.assertEqual(len(trakt_importer.bulk_media[MediaTypes.TV.value]), 1)
         tv_obj = trakt_importer.bulk_media[MediaTypes.TV.value][0]
-        self.assertEqual(tv_obj.status, Status.PLANNING.value)
+        self.assertEqual(tv_obj.status, Status.PLANNED.value)
 
     @patch("integrations.imports.trakt.TraktImporter._make_api_request")
     @patch("integrations.imports.trakt.TraktImporter._get_metadata")

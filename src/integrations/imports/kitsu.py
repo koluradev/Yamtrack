@@ -352,7 +352,7 @@ class KitsuImporter:
         status_mapping = {
             "completed": Status.COMPLETED.value,
             "current": Status.IN_PROGRESS.value,
-            "planned": Status.PLANNING.value,
+            "planned": Status.PLANNED.value,
             "on_hold": Status.PAUSED.value,
             "dropped": Status.DROPPED.value,
         }

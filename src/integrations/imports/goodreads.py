@@ -165,7 +165,7 @@ class GoodReadsImporter:
         status_mapping = {
             "read": Status.COMPLETED,
             "currently-reading": Status.IN_PROGRESS,
-            "to-read": Status.PLANNING,
+            "to-read": Status.PLANNED,
         }
 
         return status_mapping[row["Exclusive Shelf"]].value

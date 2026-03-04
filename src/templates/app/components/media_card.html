@@ -27,9 +27,9 @@
             {% include "app/icons/states/paused.svg" %}
           </div>
 
-        {% elif media.status == Status.PLANNING.value %}
-          <div class="w-4 h-4 {{ Status.PLANNING.value|status_color }} {% if media.start_date or media.end_date %}mr-1.5{% endif %}">
-            {% include "app/icons/states/planning.svg" %}
+        {% elif media.status == Status.PLANNED.value %}
+          <div class="w-4 h-4 {{ Status.PLANNED.value|status_color }} {% if media.start_date or media.end_date %}mr-1.5{% endif %}">
+            {% include "app/icons/states/planned.svg" %}
           </div>
 
         {% elif media.status == Status.DROPPED.value %}

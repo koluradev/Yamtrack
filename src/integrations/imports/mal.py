@@ -240,8 +240,8 @@ class MyAnimeListImporter:
             "completed": Status.COMPLETED.value,
             "reading": Status.IN_PROGRESS.value,
             "watching": Status.IN_PROGRESS.value,
-            "plan_to_watch": Status.PLANNING.value,
-            "plan_to_read": Status.PLANNING.value,
+            "plan_to_watch": Status.PLANNED.value,
+            "plan_to_read": Status.PLANNED.value,
             "on_hold": Status.PAUSED.value,
             "dropped": Status.DROPPED.value,
         }
