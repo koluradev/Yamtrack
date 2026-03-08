@@ -160,20 +160,35 @@ def media_list(request, media_type):
 
 @require_GET
 def media_search(request):
-    """Return the media search page."""
+    """Return the media search page (HTML)."""
     media_type = request.user.update_preference(
         "last_search_type",
         request.GET["media_type"],
     )
     query = request.GET["q"]
-    page = int(request.GET.get("page", 1))
     layout = request.GET.get("layout", "grid")
-
-    # only receives source when searching with secondary source
     source = request.GET.get(
         "source",
         config.get_default_source_name(media_type).value,
     )
+
+    context = {
+        "media_type": media_type,
+        "query": query,
+        "layout": layout,
+        "source": source,
+    }
+
+    return render(request, "app/search.html", context)
+
+
+@require_GET
+def media_search_results(request):
+    """Return HTML fragment of search results for HTMX infinite scroll."""
+    media_type = request.GET["media_type"]
+    query = request.GET["q"]
+    page = int(request.GET.get("page", 1))
+    source = request.GET.get("source")
 
     data = services.search(media_type, query, page, source)
 
@@ -183,14 +198,20 @@ def media_search(request):
             request, data["results"], "search"
         )
 
+    total_pages = data.get("total_pages", 0)
+    has_more = page < total_pages
+
     context = {
-        "data": data,
-        "source": source,
+        "results": data.get("results", []),
+        "query": query,
         "media_type": media_type,
-        "layout": layout,
+        "source": source,
+        "page": page,
+        "total_pages": total_pages,
+        "has_more": has_more,
     }
 
-    return render(request, "app/search.html", context)
+    return render(request, "app/components/search_grid_items.html", context)
 
 
 @require_GET

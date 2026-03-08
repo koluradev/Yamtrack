@@ -33,67 +33,18 @@
     </div>
   </div>
 
-  {% if data.results %}
-    <div {% if layout == 'grid' %} class="media-grid">
-      {% for result in data.results %}
-        {% include "app/components/media_card.html" with item=result.item title=result.item.title media=result.media %}
-      {% endfor %}
-    {% else %}
-      class="grid grid-cols-1 gap-4">
-      {% for result in data.results %}
-        {% include "app/components/media_card_list.html" with item=result.item title=result.item.title media=result.media %}
-      {% endfor %}
-    {% endif %}
+  <div id="search-results"
+       class="media-grid"
+       hx-get="{% url 'search_results' %}?q={{ query|urlencode }}&media_type={{ media_type }}&source={{ source }}&page=1"
+       hx-trigger="load"
+       hx-indicator="#loading-indicator">
+    <!-- Results loaded via HTMX -->
   </div>
 
-  {% if data.total_pages > 1 %}
-    <div class="flex flex-wrap justify-center items-center mt-8 gap-x-2 gap-y-3">
-      {# Previous button #}
-      {% if data.page > 1 %}
-        <a href="?q={{ request.GET.q|urlencode }}&media_type={{ media_type }}{% if source %}&source={{ source }}{% endif %}&page={{ data.page|add:'-1' }}&layout={{ layout }}"
-           class="yt-button !px-2">{% include "app/icons/chevron-left.svg" with classes="w-5 h-5" %}</a>
-      {% else %}
-        <button class="yt-button-disabled !px-2" disabled>
-          {% include "app/icons/chevron-left.svg" with classes="w-5 h-5" %}
-        </button>
-      {% endif %}
-
-      {# Page numbers with ellipses #}
-      {% get_pagination_range data.page data.total_pages 2 as pages %}
-      {% for page_num in pages %}
-        {% if page_num %}
-          <a href="?q={{ request.GET.q|urlencode }}&media_type={{ media_type }}{% if source %}&source={{ source }}{% endif %}&page={{ page_num }}&layout={{ layout }}"
-             class="yt-button-primary">{{ page_num }}</a>
-        {% else %}
-          {# Ellipsis #}
-          <span class="flex items-center justify-center w-10 h-10 text-gray-400">
-            {% include "app/icons/ellipsis.svg" with classes="w-5 h-5" %}
-          </span>
-        {% endif %}
-      {% endfor %}
-
-      {# Next button #}
-      {% if data.page < data.total_pages %}
-        <a href="?q={{ request.GET.q|urlencode }}&media_type={{ media_type }}{% if source %}&source={{ source }}{% endif %}&page={{ data.page|add:'1' }}&layout={{ layout }}"
-           class="yt-button !px-2">{% include "app/icons/chevron-right.svg" with classes="w-5 h-5" %}</a>
-      {% else %}
-        <button class="yt-button-disabled !px-2" disabled>
-          {% include "app/icons/chevron-right.svg" with classes="w-5 h-5" %}
-        </button>
-      {% endif %}
+  <div id="loading-indicator" class="htmx-indicator text-center pt-8">
+    <div class="inline-flex justify-center items-center">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-400"></div>
     </div>
-
-    {# Page info text #}
-    <div class="text-center text-sm text-gray-400 mt-3">
-      Page {{ data.page }} of {{ data.total_pages }} ({{ data.total_results }} results)
-    </div>
-  {% endif %}
-{% else %}
-  <div class="yt-container-light flex flex-col items-center justify-center py-32 px-4">
-    <h3 class="text-xl font-semibold mb-2">No results found</h3>
-    <p class="text-gray-400 text-center max-w-md mb-8">
-      We couldn't find any matches for "{{ request.GET.q }}". Try checking your spelling or using different keywords.
-    </p>
   </div>
-{% endif %}
+
 {% endblock content %}
