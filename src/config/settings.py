@@ -488,7 +488,7 @@ DEBUG_TOOLBAR_CONFIG = {
 
 SELECT2_CACHE_BACKEND = "default"
 SELECT2_JS = [
-    "js/libraries/jquery-3.7.1.min.js",
+    "js/libraries/jquery-4.0.0.min.js",
     "js/libraries/select2-4.1.0.min.js",
 ]
 SELECT2_I18N_PATH = "js/i18n"
