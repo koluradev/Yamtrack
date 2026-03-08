@@ -4,7 +4,7 @@ const urlsToCache = [
   '/static/css/main.css',
   '/static/favicon/android-chrome-192x192.png',
   '/static/favicon/android-chrome-512x512.png',
-  '/static/fonts/roboto-flex.woff2'
+  '/static/fonts/inter.woff2'
 ];
 
 // Install event
