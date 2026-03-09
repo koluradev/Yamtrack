@@ -17,7 +17,7 @@
            src="{{ media.image }}">
 
       <div x-data="{ trackOpen: false }">
-        <button class="mt-4 w-full flex items-center {% if user_medias %}yt-button-track{% else %}yt-button-gray{% endif %} !rounded-lg"
+        <button class="mt-4 w-full flex items-center {% if user_medias %}yt-button-track{% else %}yt-button{% endif %} !rounded-lg"
                 hx-get="{% media_view_url 'track_modal' media %}"
                 hx-vals='{"return_url": "{{ request.get_full_path|urlencode }}", "instance_id": "{{ current_instance.id }}"}'
                 hx-target="#{% component_id 'track' media current_instance.id %}"
