@@ -28,7 +28,7 @@ jobs:
         id: get-version
         run: |
           VERSION="${GITHUB_REF_NAME}"
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Using version: $VERSION"
 
       - name: Setup Docker buildx
@@ -45,7 +45,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=raw,value=${{ steps.version.outputs.version }},priority=900
+            type=raw,value=${{ steps.get-version.outputs.VERSION }},priority=900
             type=raw,value=redesign,priority=700
             type=raw,value=latest,priority=650
             type=sha
@@ -54,7 +54,7 @@ jobs:
             org.opencontainers.image.description=Redesign fork of Yamtrack
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.version=${{ steps.version.outputs.version }}
+            org.opencontainers.image.version=${{ steps.get-version.outputs.VERSION }}
             org.opencontainers.image.ref.name=${{ github.ref_name }}
             io.github.koluradev.yamtrack.channel=redesign
 
