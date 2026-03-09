@@ -1,15 +1,9 @@
 name: Docker Image
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - "dev"
     tags:
-      - "v*"
-  pull_request:
-    branches:
-      - "dev"
+      - "v*-*"
 
 env:
   REGISTRY: ghcr.io
@@ -33,8 +27,8 @@ jobs:
       - name: Get version from git
         id: get-version
         run: |
-          VERSION=$(git describe --tags 2>/dev/null || echo "dev")
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          VERSION="${GITHUB_REF_NAME}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Using version: $VERSION"
 
       - name: Setup Docker buildx
@@ -48,26 +42,23 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=raw,value=${{ steps.version.outputs.version }},priority=900
+            type=raw,value=redesign,priority=700
+            type=raw,value=latest,priority=650
+            type=sha
+          labels: |
+            org.opencontainers.image.title=Yamtrack
+            org.opencontainers.image.description=Redesign fork of Yamtrack
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.version.outputs.version }}
+            org.opencontainers.image.ref.name=${{ github.ref_name }}
+            io.github.koluradev.yamtrack.channel=redesign
 
-      # Determine if we should push the image
-      - name: Set push flag
-        id: push-flag
-        run: |
-          if [[ "${{ github.event_name }}" != "pull_request" || "${{ github.event.pull_request.head.repo.full_name }}" == "${{ github.repository }}" ]]; then
-            echo "PUSH=true" >> $GITHUB_OUTPUT
-          else
-            echo "PUSH=false" >> $GITHUB_OUTPUT
-          fi
-
-      # Only log in if we're going to push
       - name: Log into registry ${{ env.REGISTRY }}
-        if: steps.push-flag.outputs.PUSH == 'true'
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -79,7 +70,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: ${{ steps.push-flag.outputs.PUSH }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
