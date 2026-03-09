@@ -868,8 +868,14 @@
   .min-w-10 {
     min-width: calc(var(--spacing) * 10);
   }
+  .min-w-12 {
+    min-width: calc(var(--spacing) * 12);
+  }
   .min-w-40 {
     min-width: calc(var(--spacing) * 40);
+  }
+  .min-w-48 {
+    min-width: calc(var(--spacing) * 48);
   }
   .min-w-\[4ch\] {
     min-width: 4ch;
