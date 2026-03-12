@@ -55,7 +55,7 @@
   <div class="space-y-8">
     {% for media_type, media_list in list_by_type.items %}
       <div>
-        <h2 class="text-xl font-semibold mb-4">{{ media_type|media_type_readable_plural }}</h2>
+        <h2 class="text-2xl/9 font-bold mb-4 text-gray-300">{{ media_type|media_type_readable_plural }}</h2>
         <div id="media-grid-{{ media_type }}" class="media-grid-home">{% include "app/components/home_grid.html" %}</div>
 
         {% if media_list.total > items_limit %}

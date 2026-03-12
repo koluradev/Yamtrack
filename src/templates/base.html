@@ -80,7 +80,7 @@
             <ul class="space-y-3 mb-6">
               <li>
                 <a href="{% url 'home' %}"
-                   class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == "/" %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                   class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == "/" %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                   {% include "app/icons/house.svg" with classes="w-6 h-6" %}
                   <span>Home</span>
                 </a>
@@ -90,7 +90,7 @@
               {% for item in sidebar_media_types %}
                 <li>
                   <a href="{% url 'medialist' media_type=item.media_type %}"
-                     class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if media_type == item.media_type %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                     class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if media_type == item.media_type %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                     {% icon item.media_type %}
                     <span>{{ item.display_name }}</span>
                   </a>
@@ -103,7 +103,7 @@
                 {% url 'create_entry' as create_entry_url %}
                 <li>
                   <a href="{{ create_entry_url }}"
-                     class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == create_entry_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                     class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == create_entry_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                     {% include "app/icons/circle-plus.svg" with classes="w-6 h-6" %}
                     <span>Create Custom</span>
                   </a>
@@ -112,7 +112,7 @@
                 {% url 'statistics' as statistics_url %}
                 <li>
                   <a href="{{ statistics_url }}"
-                     class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == statistics_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                     class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == statistics_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                     {% include "app/icons/bars-pyramid.svg" with classes="w-6 h-6" %}
                     <span>Statistics</span>
                   </a>
@@ -121,7 +121,7 @@
                 {% url 'lists' as lists_url %}
                 <li>
                   <a href="{{ lists_url }}"
-                     class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == lists_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                     class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == lists_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                     {% include "app/icons/folder-plus.svg" with classes="w-6 h-6" %}
                     <span>Lists</span>
                   </a>
@@ -130,7 +130,7 @@
                 {% url 'calendar' as calendar_url %}
                 <li>
                   <a href="{{ calendar_url }}"
-                     class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == calendar_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                     class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-lg font-medium leading-6 text-white {% if request.path == calendar_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                     {% include "app/icons/calendar.svg" with classes="w-6 h-6" %}
                     <span>Calendar</span>
                   </a>
@@ -148,7 +148,7 @@
               {% url 'import_data' as import_url %}
               {% url 'export_data' as export_url %}
               <a href="{{ account_url }}"
-                 class="flex items-center space-x-3 px-4 py-2 rounded-md transition duration-150 ease-in-out text-sm font-medium leading-6 text-white {% if request.path == account_url or request.path == notifications_url or request.path == sidebar_url or request.path == integrations_url or request.path == import_url or request.path == export_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
+                 class="flex items-center space-x-3 px-2 py-2 rounded-md transition duration-150 ease-in-out text-sm font-medium leading-6 text-white {% if request.path == account_url or request.path == notifications_url or request.path == sidebar_url or request.path == integrations_url or request.path == import_url or request.path == export_url %}bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500{% else %}hover:bg-gray-700 focus:bg-gray-700{% endif %}">
                 {% include "app/icons/settings.svg" with classes="w-6 h-6" %}
                 <span>Settings</span>
               </a>
@@ -156,7 +156,7 @@
               <form method="post" action="{% url 'account_logout' %}" class="w-full">
                 {% csrf_token %}
                 <button type="submit"
-                        class="w-full flex items-center space-x-3 px-4 py-2 rounded-md text-gray-400 hover:bg-gray-700 focus:bg-gray-700 hover:text-white transition duration-150 text-sm cursor-pointer ease-in-out font-medium">
+                        class="w-full flex items-center space-x-3 px-2 py-2 rounded-md text-gray-400 hover:bg-gray-700 focus:bg-gray-700 hover:text-white transition duration-150 text-sm cursor-pointer ease-in-out font-medium">
                   {% include "app/icons/logout.svg" with classes="w-6 h-6" %}
                   <span>Logout</span>
                 </button>

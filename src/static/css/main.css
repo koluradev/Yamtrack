@@ -868,9 +868,6 @@
   .min-w-10 {
     min-width: calc(var(--spacing) * 10);
   }
-  .min-w-12 {
-    min-width: calc(var(--spacing) * 12);
-  }
   .min-w-40 {
     min-width: calc(var(--spacing) * 40);
   }
@@ -1925,6 +1922,14 @@
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-2xl\/8 {
+    font-size: var(--text-2xl);
+    line-height: calc(var(--spacing) * 8);
+  }
+  .text-2xl\/9 {
+    font-size: var(--text-2xl);
+    line-height: calc(var(--spacing) * 9);
   }
   .text-3xl {
     font-size: var(--text-3xl);
