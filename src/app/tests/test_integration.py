@@ -44,12 +44,16 @@ class IntegrationTest(StaticLiveServerTestCase):
         """Test the progress edit of a season."""
         self.page.get_by_placeholder("Search tv shows...").fill("breaking bad")
         self.page.get_by_role("button").nth(1).click()
-        expect(self.page.locator("h2")).to_contain_text("Search Results")
-        self.page.get_by_title("Breaking Bad", exact=True).click()
+        expect(self.page.locator("h1.yt-page-title")).to_contain_text("Search Results")
+        self.page.get_by_title("Breaking Bad", exact=True).click(
+            force=True, position={"x": 10, "y": 10}
+        )
         expect(self.page.get_by_role("main")).to_contain_text("Breaking Bad")
-        self.page.get_by_title("Season 1").click()
-        expect(self.page.get_by_role("main")).to_contain_text("Season 1")
-        self.page.locator(".p-2").first.click()
+        self.page.locator('a[href$="/season/1"]').nth(1).click(
+            force=True, position={"x": 10, "y": 10}
+        )
+        expect(self.page.locator("h1").nth(1)).to_contain_text("1")
+        self.page.get_by_title("Track Episode").first.click()
         expect(self.page.get_by_role("main")).to_contain_text("Track Episode")
         self.page.get_by_role("button", name="Air date").click()
         self.page.get_by_role("button", name="Add watch").click()
@@ -65,9 +69,11 @@ class IntegrationTest(StaticLiveServerTestCase):
         self.page.get_by_role("link", name="Home").click()
         expect(self.page.get_by_text("Breaking Bad S1 1 Episode")).to_be_visible()
         self.page.get_by_text("Breaking Bad S1 1 Episode").get_by_role("button").nth(
-            1,
+            4,
         ).click()
-        self.page.get_by_title("Breaking Bad S1").click()
+        self.page.locator('a[href$="breaking-bad/season/1"]').nth(1).click(
+            force=True, position={"x": 10, "y": 10}
+        )
 
         today = timezone.localtime().strftime(datetime_format)
         expect(self.page.get_by_role("main")).to_contain_text(f"Last watched: {today}")
@@ -79,8 +85,10 @@ class IntegrationTest(StaticLiveServerTestCase):
         self.page.locator("form").filter(has_text="TV Shows TV").get_by_role(
             "button",
         ).first.click()
-        expect(self.page.locator("h2")).to_contain_text("Search Results")
-        self.page.get_by_title("Breaking Bad", exact=True).click()
+        expect(self.page.locator("h1.yt-page-title")).to_contain_text("Search Results")
+        self.page.get_by_title("Breaking Bad", exact=True).click(
+            force=True, position={"x": 10, "y": 10}
+        )
         expect(self.page.get_by_role("main")).to_contain_text("Breaking Bad")
         self.page.locator("button").filter(has_text="Add to tracker").click()
         expect(self.page.locator("#track-tv-1396")).to_contain_text("Score")
@@ -94,11 +102,15 @@ class IntegrationTest(StaticLiveServerTestCase):
         """Test the completed status of a season."""
         self.page.get_by_placeholder("Search tv shows...").fill("breaking bad")
         self.page.get_by_role("button").nth(1).click()
-        expect(self.page.locator("h2")).to_contain_text("Search Results")
-        self.page.get_by_title("Breaking Bad", exact=True).click()
+        expect(self.page.locator("h1.yt-page-title")).to_contain_text("Search Results")
+        self.page.get_by_title("Breaking Bad", exact=True).click(
+            force=True, position={"x": 10, "y": 10}
+        )
         expect(self.page.get_by_role("main")).to_contain_text("Breaking Bad")
-        self.page.get_by_title("Season 1").click()
-        expect(self.page.get_by_role("main")).to_contain_text("Season 1")
+        self.page.locator('a[href$="/season/1"]').nth(1).click(
+            force=True, position={"x": 10, "y": 10}
+        )
+        expect(self.page.locator("h1").nth(1)).to_contain_text("1")
         self.page.get_by_role("button", name="Add to tracker").click()
         expect(self.page.locator("#track-season-1396-1")).to_contain_text("Score")
         self.page.get_by_role("button", name="Add", exact=True).click()
@@ -166,10 +178,12 @@ class IntegrationTest(StaticLiveServerTestCase):
         self.page.get_by_role("link", name="Grid View").click()
         expect(self.page.get_by_role("main")).to_contain_text("Friends S1")
         self.page.get_by_role("link", name="TV Shows").click()
-        self.page.get_by_title("Friends").click()
+        self.page.get_by_title("Friends").click(force=True, position={"x": 10, "y": 10})
         expect(self.page.get_by_role("main")).to_contain_text("Friends")
         expect(self.page.get_by_role("main")).to_contain_text("Season 1")
-        self.page.get_by_title("Season 1").click()
+        self.page.get_by_title("Season 1").click(
+            force=True, position={"x": 10, "y": 10}
+        )
         expect(self.page.get_by_role("main")).to_contain_text("Season 1")
         expect(self.page.get_by_role("main")).to_contain_text(
             "Episode 1 • Unknown air date",

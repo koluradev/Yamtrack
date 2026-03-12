@@ -83,7 +83,9 @@
     </div>
 
     <div class="absolute inset-0 bg-gradient-to-b from-gray-800/40 to-gray-800/90 flex items-center justify-center transition-opacity opacity-0 hover:opacity-100 active:opacity-100{% if user.clickable_media_cards %} pointer-coarse:hidden{% endif %}">
-      <a href="{{ item|media_url }}" class="absolute inset-0"></a>
+      <a href="{{ item|media_url }}"
+         class="absolute inset-0"
+         title="{{ title }}"></a>
 
       <div class="relative flex items-center justify-center space-x-2.5">
         {% if item.media_type == MediaTypes.EPISODE.value %}

@@ -93,7 +93,7 @@ class ImportSteam(TestCase):
         self.assertEqual(cs2_game.progress, 1250)
 
         dota_game = games.get(item__title="Dota 2")
-        self.assertEqual(dota_game.status, Status.PLANNED.value)
+        self.assertEqual(dota_game.status, Status.NOT_STARTED.value)
         self.assertEqual(dota_game.progress, 0)
 
         tf2_game = games.get(item__title="Team Fortress 2")
@@ -153,7 +153,7 @@ class ImportSteam(TestCase):
         importer_instance = steam.SteamImporter("76561198000000000", self.user, "new")
 
         status = importer_instance._determine_game_status(0, 0)
-        self.assertEqual(status, Status.PLANNED.value)
+        self.assertEqual(status, Status.NOT_STARTED.value)
 
         status = importer_instance._determine_game_status(100, 50)
         self.assertEqual(status, Status.IN_PROGRESS.value)
